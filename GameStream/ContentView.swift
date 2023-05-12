@@ -9,31 +9,37 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
+        
+
+        NavigationStack {
             
-            Spacer()
-            
-            Color(red: 18/255, green: 31/255, blue: 61/255, opacity: 1.0)
-                .ignoresSafeArea()
-            
-            VStack {
+            ZStack {
                 
-                HStack(spacing: 0.0) {
-                    Image("appLogoController")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 23)
-                        .padding(.trailing, 10.0)
-                    Image("appLogo")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    .frame(width: 170)
+                Spacer()
+                
+                Color("marine")
+                    .ignoresSafeArea()
+                
+                VStack {
+                    
+                    HStack(spacing: 0.0) {
+                        Image("appLogoController")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 23)
+                            .padding(.trailing, 10.0)
+                        Image("appLogo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        .frame(width: 170)
+                    }
+                    .padding(.bottom, 60)
+                    
+                    LoginAndSignUpView()
+                    
                 }
-                .padding(.bottom, 60)
-                
-                LoginAndSignUpView()
-                
             }
+            
         }
     }
 }
@@ -83,6 +89,7 @@ struct LoginAndSignUpView: View {
 struct LoginView: View {
     
     @State var email = ""
+    @State var isHomeViewActive = false
     
     var body: some View {
         
@@ -96,24 +103,20 @@ struct LoginView: View {
                     .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
                     .padding(.bottom)
                 
-                ZStack(alignment: .leading) {
+                TextField(text: $email) {
                     
-                    if email.isEmpty {
-                        Text(verbatim: "ejemplo@gmail.com")
-                            .foregroundColor(.gray)
-                            .font(.subheadline)
-                            .padding(.bottom, 8)
-                    }
-                                        
-                    TextField("", text: $email)
-                        .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
-                        .frame(height: 20)
-                        .padding(.bottom, 8)
-                        .foregroundColor(.white)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(true)
-                        
+                    Text(verbatim: "ejemplo@gmail.com")
+                        .foregroundColor(.gray)
+                        .font(.subheadline)
+                    
                 }
+                .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
+                .frame(height: 20)
+                .padding(.bottom, 8)
+                .foregroundColor(.white)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled(true)
+
                 
                 Divider()
                     .frame(height: 1)
@@ -146,7 +149,7 @@ struct LoginView: View {
                 
                 Spacer(minLength: 60)
                 
-                Button(action: login) {
+                Button(action: { login(homeViewStatus: $isHomeViewActive) }, label: {
                     Text("INICIAR SESIÓN")
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -154,15 +157,19 @@ struct LoginView: View {
                         .font(.title2)
                         .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
                         .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("dark-cian"), lineWidth: 1.0).shadow(color: Color("dark-cian"), radius: 5))
-                }
+                })
                 .padding(.bottom, 60)
+                .navigationDestination(isPresented: $isHomeViewActive, destination: {
+                    HomeView()
+                })
+                
                 
                 VStack {
                     Text("Inicia sesión con redes sociales")
                         .frame(maxWidth: .infinity, alignment: .center)
                         .foregroundColor(.white)
                         .font(.headline)
-                    .padding(.bottom, 20)
+                        .padding(.bottom, 20)
                     
                     HStack {
                         
@@ -194,6 +201,7 @@ struct LoginView: View {
                 
             }
             .padding(.horizontal, 20.0)
+            
         }
     }
 }
@@ -219,14 +227,18 @@ struct CustomSecureField: View {
                                     
                 if showPassword {
                     
-                    TextField("", text: $password)
-                        .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
-                        .frame(height: 20)
-                        .padding(.bottom, 8)
-                        .foregroundColor(.white)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(true)
-                        .opacity(showPassword ? 1 : 0)
+                    TextField(text: $password) {
+                        Text(verbatim: "Escribe tu contraseña")
+                            .foregroundColor(.gray)
+                            .font(.subheadline)
+                    }
+                    .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
+                    .frame(height: 20)
+                    .padding(.bottom, 8)
+                    .foregroundColor(.white)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled(true)
+                    .opacity(showPassword ? 1 : 0)
                     
                 } else {
                     
@@ -259,8 +271,8 @@ struct CustomSecureField: View {
     }
 }
 
-func login() {
-    print("Estoy inciando sesión")
+func login(homeViewStatus: Binding<Bool>) {
+    homeViewStatus.wrappedValue = true
 }
 
 func facebookLogin() {
@@ -320,24 +332,19 @@ struct SignUpView: View {
                     .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
                     .padding(.bottom)
                 
-                ZStack(alignment: .leading) {
+                TextField(text: $email) {
                     
-                    if email.isEmpty {
-                        Text(verbatim: "ejemplo@gmail.com")
-                            .foregroundColor(.gray)
-                            .font(.subheadline)
-                            .padding(.bottom, 8)
-                    }
-                                        
-                    TextField("", text: $email)
-                        .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
-                        .frame(height: 20)
-                        .padding(.bottom, 8)
-                        .foregroundColor(.white)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(true)
-                        
+                    Text(verbatim: "ejemplo@gmail.com")
+                        .foregroundColor(.gray)
+                        .font(.subheadline)
+                    
                 }
+                .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
+                .frame(height: 20)
+                .padding(.bottom, 8)
+                .foregroundColor(.white)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled(true)
                 
                 Divider()
                     .frame(height: 1)
@@ -375,7 +382,7 @@ struct SignUpView: View {
                 
                 Spacer(minLength: 60)
                 
-                Button(action: login) {
+                Button(action: signUp) {
                     Text("REGÍSTRATE")
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -431,12 +438,12 @@ func takePhoto() {
     print("Tomar foto")
 }
 
+func signUp() {
+    print("Registrarse")
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-//        Image("pantalla2")
-//            .resizable()
-//            .aspectRatio(contentMode: .fit)
-//            .ignoresSafeArea()
     }
 }
