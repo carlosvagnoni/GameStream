@@ -1,19 +1,15 @@
 //
-//  Model.swift
+//  GameView.swift
 //  GameStream
 //
-//  Created by user239477 on 5/12/23.
+//  Created by user239477 on 5/13/23.
 //
 
-import Foundation
+import SwiftUI
 
-struct Games: Codable {
+struct GameView: View {
     
-    var games: [Game]
-    
-}
-
-struct Game: Codable, Hashable {
+    var url: String
     
     var title: String
     
@@ -29,17 +25,15 @@ struct Game: Codable, Hashable {
     
     var tags: [String]
     
-    var videosUrls: VideosUrls
-    
     var galleryImages: [String]
     
+    var body: some View {
+        Text("Game")
+    }
 }
 
-struct VideosUrls: Codable, Hashable {
-    
-    var mobile: String
-    
-    var tablet: String
-
-    
-}
+//struct GameView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GameView()
+//    }
+//}

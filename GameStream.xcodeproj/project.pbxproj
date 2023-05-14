@@ -12,6 +12,13 @@
 		DD9683082A0B09670005FC21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9683072A0B09670005FC21 /* ContentView.swift */; };
 		DD96830A2A0B09670005FC21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD9683092A0B09670005FC21 /* Assets.xcassets */; };
 		DD96830D2A0B09670005FC21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD96830C2A0B09670005FC21 /* Preview Assets.xcassets */; };
+		DDB1AD642A10877000F442AC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB1AD632A10877000F442AC /* GameView.swift */; };
+		DDBD1C6A2A0F995F002E849B /* LoginAndSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C692A0F995F002E849B /* LoginAndSignUpView.swift */; };
+		DDBD1C6C2A0F9A3B002E849B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C6B2A0F9A3B002E849B /* LoginView.swift */; };
+		DDBD1C6E2A0F9B58002E849B /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C6D2A0F9B58002E849B /* CustomSecureField.swift */; };
+		DDBD1C702A0F9C1F002E849B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C6F2A0F9C1F002E849B /* SignUpView.swift */; };
+		DDBD1C722A0F9E84002E849B /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C712A0F9E84002E849B /* HomeTabView.swift */; };
+		DDBD1C742A0FA050002E849B /* SubModuleHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C732A0FA050002E849B /* SubModuleHome.swift */; };
 		DDEFB6132A0F3989003845A1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6122A0F3989003845A1 /* Model.swift */; };
 		DDEFB6152A0F39B5003845A1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6142A0F39B5003845A1 /* ViewModel.swift */; };
 		DDEFB6172A0F39EF003845A1 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6162A0F39EF003845A1 /* GamesView.swift */; };
@@ -24,6 +31,13 @@
 		DD9683072A0B09670005FC21 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DD9683092A0B09670005FC21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD96830C2A0B09670005FC21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DDB1AD632A10877000F442AC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		DDBD1C692A0F995F002E849B /* LoginAndSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndSignUpView.swift; sourceTree = "<group>"; };
+		DDBD1C6B2A0F9A3B002E849B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DDBD1C6D2A0F9B58002E849B /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
+		DDBD1C6F2A0F9C1F002E849B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		DDBD1C712A0F9E84002E849B /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
+		DDBD1C732A0FA050002E849B /* SubModuleHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubModuleHome.swift; sourceTree = "<group>"; };
 		DDEFB6122A0F3989003845A1 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DDEFB6142A0F39B5003845A1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DDEFB6162A0F39EF003845A1 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
@@ -81,8 +95,15 @@
 			isa = PBXGroup;
 			children = (
 				DD9683072A0B09670005FC21 /* ContentView.swift */,
+				DDBD1C692A0F995F002E849B /* LoginAndSignUpView.swift */,
+				DDBD1C6B2A0F9A3B002E849B /* LoginView.swift */,
+				DDBD1C6D2A0F9B58002E849B /* CustomSecureField.swift */,
+				DDBD1C6F2A0F9C1F002E849B /* SignUpView.swift */,
+				DDBD1C712A0F9E84002E849B /* HomeTabView.swift */,
 				DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */,
+				DDBD1C732A0FA050002E849B /* SubModuleHome.swift */,
 				DDEFB6162A0F39EF003845A1 /* GamesView.swift */,
+				DDB1AD632A10877000F442AC /* GameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,6 +199,13 @@
 				DD6BA8F52A0CFA3B00DB5E88 /* HomeView.swift in Sources */,
 				DD9683082A0B09670005FC21 /* ContentView.swift in Sources */,
 				DD9683062A0B09670005FC21 /* GameStreamApp.swift in Sources */,
+				DDBD1C722A0F9E84002E849B /* HomeTabView.swift in Sources */,
+				DDBD1C6A2A0F995F002E849B /* LoginAndSignUpView.swift in Sources */,
+				DDBD1C742A0FA050002E849B /* SubModuleHome.swift in Sources */,
+				DDBD1C702A0F9C1F002E849B /* SignUpView.swift in Sources */,
+				DDBD1C6C2A0F9A3B002E849B /* LoginView.swift in Sources */,
+				DDBD1C6E2A0F9B58002E849B /* CustomSecureField.swift in Sources */,
+				DDB1AD642A10877000F442AC /* GameView.swift in Sources */,
 				DDEFB6132A0F3989003845A1 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
