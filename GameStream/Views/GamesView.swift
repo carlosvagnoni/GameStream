@@ -74,7 +74,7 @@ struct GamesView: View {
                                 galleryImages = game.galleryImages
                                 
                                 gameViewIsActive = true
-                                
+                                                                
                             } label: {
                                 
                                 VStack(spacing: 0) {
@@ -86,8 +86,7 @@ struct GamesView: View {
 
                                     } placeholder: {
                                         
-                                        Text("\(game.title)").foregroundColor(.white)
-                                            .font(.body)
+                                        ProgressView()
 
                                         }
                                     
