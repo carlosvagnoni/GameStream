@@ -10,6 +10,8 @@ import AVKit
 
 struct GameView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     var url: String
     
     var title: String
@@ -49,7 +51,9 @@ struct GameView: View {
                         
                         GalleryImages(galleryImages: galleryImages)
                         
-                        Comments()
+                        Comments(gameTitleFilter: title)
+                        
+                        SimilarGames()
                         
                     }
                     .padding(.horizontal, 20)
@@ -58,6 +62,25 @@ struct GameView: View {
                 .frame(maxWidth: .infinity)
             }
             
+        }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                
+                Button {
+                    
+                    dismiss()
+                    
+                } label: {
+                    
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+                
+                
+            }
         }
         
     }
@@ -253,6 +276,12 @@ struct GalleryImages: View {
 
 struct Comments: View {
     
+    let gameTitleFilter: String
+    
+    var filteredData: [CommentsTableData] {
+            CommentsData.filterByGameTitle(gameTitleFilter: gameTitleFilter)
+        }
+    
     var body: some View {
         
         Text("COMENTARIOS")
@@ -262,6 +291,188 @@ struct Comments: View {
             .foregroundColor(.white)
             .padding(.bottom, 15)
         
+        VStack(spacing: 0) {
+            
+            ForEach(filteredData, id: \.self) {
+                comment in
+                
+                ZStack {
+                    
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color("blue-gray"))
+                    
+                    VStack(spacing: 0) {
+                        
+                        HStack {
+                            
+                            Image("\(comment.authorProfilePhoto)")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .padding(15)
+                            
+                            VStack(spacing: 0) {
+                                
+                                Text("\(comment.author)")
+                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                    .padding(.bottom, 8)
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                
+                                Text("\(comment.commentDate)")
+                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                                
+                            }
+                            .padding(0)
+                            
+                        }
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        
+                        Text("\(comment.comment)")
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .padding(EdgeInsets(top: 0, leading: 15, bottom: 15, trailing: 15))
+                        
+                    }
+                    
+                }
+                .padding(.bottom, 10)
+                
+            }
+            
+        }
+        .padding(.bottom, 20)
+    }
+}
+
+struct SimilarGames: View {
+    
+    var body: some View {
+        
+        Text("JUEGOS SIMILARES")
+            .font(.title2)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .padding(.bottom, 15)
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+                        
+                        HStack {
+                            
+                            Button {
+                                
+                                print("Ir a juego 1")
+                                
+                            } label: {
+                                
+                                Image("tlouii")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 2")
+                                
+                            } label: {
+                                
+                                Image("destiny")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 3")
+                                
+                            } label: {
+                                
+                                Image("spiderman")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 4")
+                                
+                            } label: {
+                                
+                                Image("titanfall2")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 5")
+                                
+                            } label: {
+                                
+                                Image("uncharted4")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 6")
+                                
+                            } label: {
+                                
+                                Image("assassinscreed")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 7")
+                                
+                            } label: {
+                                
+                                Image("farcry4")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 8")
+                                
+                            } label: {
+                                
+                                Image("battlefield6")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .cornerRadius(8)
+                                
+                            }
+
+                            
+                        }
+                        
+                    }
+        .frame(maxHeight: 150)
+        
     }
 }
 
@@ -269,7 +480,7 @@ struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        GameView(url: "ejemplo", title: "Sonic The Hedgehog", studio: "Sega", contentRaiting: "E+", publicationYear: "1991", description: "Juego de Sega Genesis publicado en 1991 con más de 40 millones de copias vendidas actualmente", platforms:  ["PC", "Playstation 4"], tags: ["plataformas","mascota"], galleryImages: [ "https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_fad459eb04408dd926de3b789c8bc6d13bf855c0.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_931f13ad19753ac5d491bc55e31ec9e2181ca637.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_c2439741a40a81e4772412b4a92866aa1f188f2f.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_1a5bd0956c774afcadb1474f5fed2085715f2987.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_bf301672eede469605ef823057cba1eb3b845f12.600x338.jpg"
+        GameView(url: "ejemplo", title: "Crash Bandicoot™ N. Sane Trilogy", studio: "Sega", contentRaiting: "E+", publicationYear: "1991", description: "Juego de Sega Genesis publicado en 1991 con más de 40 millones de copias vendidas actualmente", platforms:  ["PC", "Playstation 4"], tags: ["plataformas","mascota"], galleryImages: [ "https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_fad459eb04408dd926de3b789c8bc6d13bf855c0.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_931f13ad19753ac5d491bc55e31ec9e2181ca637.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_c2439741a40a81e4772412b4a92866aa1f188f2f.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_1a5bd0956c774afcadb1474f5fed2085715f2987.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_bf301672eede469605ef823057cba1eb3b845f12.600x338.jpg"
                                                                                                                                                                                                                                                                                                                                 ])
         
     }

@@ -10,6 +10,8 @@ import AVKit
 
 struct SubModuleHome: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @State var url = "https://cdn.cloudflare.steamstatic.com/steam/apps/256658589/movie480.mp4"
     
     @State var isPlayerActive = false
@@ -72,12 +74,12 @@ struct SubModuleHome: View {
                 .foregroundColor(.white)
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 10)
-
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 
                 HStack {
-                                     
-                                        
+                    
+                    
                     Button {
                         
                         print("Categoria 1")
@@ -88,14 +90,14 @@ struct SubModuleHome: View {
                             
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("blue-gray"))
-                            .frame(width: 200, height: 130)
+                                .frame(width: 200, height: 130)
                             
                             VStack {
                                 
                                 Image("appLogoController")
                                     . resizable()
                                     .scaledToFit()
-                                .frame(width: 42, height: 42)
+                                    .frame(width: 42, height: 42)
                                 
                                 Text("CATEGORY")
                                     .font(.title3)
@@ -103,7 +105,7 @@ struct SubModuleHome: View {
                                     .foregroundColor(Color("dark-cian"))
                             }
                         }
-   
+                        
                     }
                     
                     Button {
@@ -116,14 +118,14 @@ struct SubModuleHome: View {
                             
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("blue-gray"))
-                            .frame(width: 200, height: 130)
+                                .frame(width: 200, height: 130)
                             
                             VStack {
                                 
                                 Image("fps")
                                     . resizable()
                                     .scaledToFit()
-                                .frame(width: 42, height: 42)
+                                    .frame(width: 42, height: 42)
                                 
                                 Text("FPS")
                                     .font(.title3)
@@ -131,7 +133,7 @@ struct SubModuleHome: View {
                                     .foregroundColor(Color("dark-cian"))
                             }
                         }
-   
+                        
                     }
                     
                     Button {
@@ -144,14 +146,14 @@ struct SubModuleHome: View {
                             
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("blue-gray"))
-                            .frame(width: 200, height: 130)
+                                .frame(width: 200, height: 130)
                             
                             VStack {
                                 
                                 Image("rpg-icon")
                                     . resizable()
                                     .scaledToFit()
-                                .frame(width: 42, height: 42)
+                                    .frame(width: 42, height: 42)
                                 
                                 Text("RPG")
                                     .font(.title3)
@@ -159,7 +161,7 @@ struct SubModuleHome: View {
                                     .foregroundColor(Color("dark-cian"))
                             }
                         }
-   
+                        
                     }
                     
                     Button {
@@ -172,14 +174,14 @@ struct SubModuleHome: View {
                             
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color("blue-gray"))
-                            .frame(width: 200, height: 130)
+                                .frame(width: 200, height: 130)
                             
                             VStack {
                                 
                                 Image("open-world-icon")
                                     . resizable()
                                     .scaledToFit()
-                                .frame(width: 42, height: 42)
+                                    .frame(width: 42, height: 42)
                                 
                                 Text("OPEN WORLD")
                                     .font(.title3)
@@ -187,11 +189,11 @@ struct SubModuleHome: View {
                                     .foregroundColor(Color("dark-cian"))
                             }
                         }
-   
+                        
                     }
                     
                     
-
+                    
                     
                 }
                 
@@ -298,7 +300,7 @@ struct SubModuleHome: View {
                             .cornerRadius(8)
                         
                     }
-
+                    
                     
                 }
                 
@@ -419,7 +421,7 @@ struct SubModuleHome: View {
                             .cornerRadius(8)
                         
                     }
-
+                    
                     
                 }
                 
@@ -430,20 +432,50 @@ struct SubModuleHome: View {
         }
         
         NavigationLink(
-            destination: ZStack {
+            destination: Videos(url: url),
+            isActive: $isPlayerActive,
+            label: {
+                EmptyView()
+            })
+    }
+}
+
+struct Videos: View {
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    let url: String
+    
+    var body: some View {
+        
+        ZStack {
+            
+            Color("marine")
+            
+            VideoPlayer(player:
+                            AVPlayer(url:  URL(string: url)!))
+            .frame(width: 400, height: 300)
+        }
+        .ignoresSafeArea()
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
                 
-                Color("marine")
+                Button {
+                    
+                    dismiss()
+                    
+                } label: {
+                    
+                    Image(systemName: "chevron.left")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
                 
-                VideoPlayer(player:
-                                AVPlayer(url:  URL(string: url)!))
-                .frame(width: 400, height: 300)
+                
             }
-                .ignoresSafeArea()
-                        ,
-                    isActive: $isPlayerActive,
-                    label: {
-                        EmptyView()
-                    })
+        }
     }
 }
 

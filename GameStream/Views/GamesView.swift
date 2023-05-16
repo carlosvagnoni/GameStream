@@ -45,13 +45,26 @@ struct GamesView: View {
             Color("marine")
                 .ignoresSafeArea()
             
-            VStack {
+            VStack(spacing: 0) {
+                
+                HStack(spacing: 0.0) {
+                    Image("appLogoController")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 23)
+                        .padding(.trailing, 10.0)
+                    Image("appLogo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    .frame(width: 170)
+                }
+                .padding(.bottom, 50)
                 
                 Text("Juegos")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .padding(EdgeInsets(top: 16, leading: 0, bottom: 50, trailing: 0))
+                    .padding(.bottom, 50)
                 
                 ScrollView {
                     
