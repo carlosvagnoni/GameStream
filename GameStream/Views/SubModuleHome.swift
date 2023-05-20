@@ -12,30 +12,93 @@ struct SubModuleHome: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State var url = "https://cdn.cloudflare.steamstatic.com/steam/apps/256658589/movie480.mp4"
+    @State var searchText = ""
     
-    @State var isPlayerActive = false
+    @ObservedObject var foundGame = SearchGame()
     
-    let urlVideos:[String] = ["https://cdn.cloudflare.steamstatic.com/steam/apps/256658589/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256671638/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256720061/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256814567/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256705156/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256801252/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256757119/movie480.mp4"]
+    @State var isGameViewActive = false
+    
+    @State var url: String = ""
+    
+    @State var title: String = ""
+    
+    @State var studio: String = ""
+    
+    @State var contentRaiting: String = ""
+    
+    @State var publicationYear: String = ""
+    
+    @State var description: String = ""
+    
+    @State var platforms: [String] = [""]
+    
+    @State var tags: [String] = [""]
+    
+    @State var galleryImages: [String] = [""]
+    
+    @State private var activeAlert: GameAlert?
     
     var body: some View {
         
         
-        VStack {
+        VStack(spacing: 0) {
+            
+            HStack {
+                
+                Button {
+                    
+                    if searchText.isEmpty {
+                        
+                        activeAlert = .searchTextEmpty
+                        
+                    } else {
+                        
+                        watchGame(name: searchText)
+                        
+                    }
+                    
+                    
+                } label: {
+                    
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(searchText.isEmpty ? Color(.white) : Color("dark-cian"))
+                    
+                }
+                .alert(item: $activeAlert) { alertType in
+                    switch alertType {
+                    case .gameNotFound:
+                        return Alert(title: Text("Error"), message: Text("No se encontró el juego"), dismissButton: .default(Text("OK")))
+                    case .searchTextEmpty:
+                        return Alert(title: Text("Error"), message: Text("El campo de búsqueda no puede estar vacío"), dismissButton: .default(Text("OK")))
+                    }
+                }
+                
+                TextField(text: $searchText) {
+                    Text("Buscar video")
+                        .foregroundColor(.gray)
+                }
+                .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
+                .foregroundColor(.white)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled(true)
+
+            }
+            .padding([.top, .leading, .bottom], 11.0)
+            .background(Color("blue-gray"))
+            .clipShape(Capsule())
+            .padding(.bottom, 35)
             
             Text("LOS MÁS POPULARES")
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 10)
+                .padding(.bottom, 15)
             
             
             Button {
                 
-                url = urlVideos[0]
-                
-                isPlayerActive = true
+                watchGame(name: "The Witcher 3")
                 
             } label: {
                 
@@ -48,6 +111,7 @@ struct SubModuleHome: View {
                             .scaledToFill()
                         
                         Text("The Witcher 3: Wild Hunt")
+                            .foregroundColor(.white)
                             .fontWeight(.bold)
                             .frame(height: 40)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
@@ -66,14 +130,14 @@ struct SubModuleHome: View {
                 }
                 
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 30)
             
             Text("CATEGORÍAS SUGERIDAS PARA TI")
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 10)
+                .padding(.bottom, 15)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 
@@ -198,14 +262,14 @@ struct SubModuleHome: View {
                 }
                 
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 30)
             
             Text("RECOMENDADO PARA TI")
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 10)
+                .padding(.bottom, 15)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 
@@ -213,9 +277,7 @@ struct SubModuleHome: View {
                     
                     Button {
                         
-                        url = urlVideos[1]
-                        
-                        isPlayerActive = true
+                        watchGame(name: "Abzu")
                         
                     } label: {
                         
@@ -228,9 +290,7 @@ struct SubModuleHome: View {
                     
                     Button {
                         
-                        url = urlVideos[2]
-                        
-                        isPlayerActive = true
+                        watchGame(name: "Crash Bandicoot")
                         
                     } label: {
                         
@@ -243,9 +303,7 @@ struct SubModuleHome: View {
                     
                     Button {
                         
-                        url = urlVideos[3]
-                        
-                        isPlayerActive = true
+                        watchGame(name: "DEATH STRANDING")
                         
                     } label: {
                         
@@ -258,9 +316,7 @@ struct SubModuleHome: View {
                     
                     Button {
                         
-                        url = urlVideos[4]
-                        
-                        isPlayerActive = true
+                        watchGame(name: "Cuphead")
                         
                     } label: {
                         
@@ -273,9 +329,7 @@ struct SubModuleHome: View {
                     
                     Button {
                         
-                        url = urlVideos[5]
-                        
-                        isPlayerActive = true
+                        watchGame(name: "Hades")
                         
                     } label: {
                         
@@ -288,9 +342,7 @@ struct SubModuleHome: View {
                     
                     Button {
                         
-                        url = urlVideos[6]
-                        
-                        isPlayerActive = true
+                        watchGame(name: "Grand Theft Auto V")
                         
                     } label: {
                         
@@ -305,14 +357,14 @@ struct SubModuleHome: View {
                 }
                 
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 30)
             
             Text("JUEGOS QUE PODRÍAN GUSTARTE")
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 10)
+                .padding(.bottom, 15)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 
@@ -426,58 +478,79 @@ struct SubModuleHome: View {
                 }
                 
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 30)
             
             
         }
         
-        NavigationLink(
-            destination: Videos(url: url),
-            isActive: $isPlayerActive,
-            label: {
-                EmptyView()
-            })
+        
+        NavigationLink(destination: GameView(url: url, title: title, studio: studio, contentRaiting: contentRaiting, publicationYear: publicationYear, description: description, platforms: platforms, tags: tags, galleryImages: galleryImages), isActive: $isGameViewActive) {
+            EmptyView()
+        }
+        
     }
-}
+    
+    enum GameAlert: Identifiable {
+        case gameNotFound
+        case searchTextEmpty
 
-struct Videos: View {
-    
-    @Environment(\.dismiss) private var dismiss
-    
-    let url: String
-    
-    var body: some View {
-        
-        ZStack {
-            
-            Color("marine")
-            
-            VideoPlayer(player:
-                            AVPlayer(url:  URL(string: url)!))
-            .frame(width: 400, height: 300)
-        }
-        .ignoresSafeArea()
-        .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                
-                Button {
-                    
-                    dismiss()
-                    
-                } label: {
-                    
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
-                
-                
+        var id: Int {
+            switch self {
+            case .gameNotFound:
+                return 1
+            case .searchTextEmpty:
+                return 2
             }
         }
     }
+    
+    func watchGame(name: String) {
+        
+        foundGame.search(gameName: name) { finished in
+            
+            if finished {
+                
+                DispatchQueue.main.async {
+                                        
+                    if foundGame.gameInfo.count == 0 {
+                        
+                        activeAlert = .gameNotFound
+                        
+                    } else {
+                        
+                        url = foundGame.gameInfo[0].videosUrls.mobile
+                        title = foundGame.gameInfo[0].title
+                        studio = foundGame.gameInfo[0].studio
+                        contentRaiting = foundGame.gameInfo[0].contentRaiting
+                        publicationYear = foundGame.gameInfo[0].publicationYear
+                        description = foundGame.gameInfo[0].description
+                        platforms = foundGame.gameInfo[0].platforms
+                        tags = foundGame.gameInfo[0].tags
+                        galleryImages = foundGame.gameInfo[0].galleryImages
+                        
+                        isGameViewActive = true
+                        
+                    }
+                    
+                }
+                
+            } else {
+                
+                DispatchQueue.main.async {
+                    
+                    activeAlert = .gameNotFound
+                    
+                }
+            }
+            
+        }
+        
+    }
+    
+    
 }
+
+
 
 struct SubModuleHome_Previews: PreviewProvider {
     
@@ -490,7 +563,7 @@ struct SubModuleHome_Previews: PreviewProvider {
             Color("marine")
                 .ignoresSafeArea()
             
-            SubModuleHome()
+            SubModuleHome(url: "ejemplo", title: "Crash Bandicoot™ N. Sane Trilogy", studio: "Sega", contentRaiting: "E+", publicationYear: "1991", description: "Juego de Sega Genesis publicado en 1991 con más de 40 millones de copias vendidas actualmente", platforms:  ["PC", "Playstation 4"], tags: ["plataformas","mascota"], galleryImages: [ "https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_fad459eb04408dd926de3b789c8bc6d13bf855c0.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_931f13ad19753ac5d491bc55e31ec9e2181ca637.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_c2439741a40a81e4772412b4a92866aa1f188f2f.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_1a5bd0956c774afcadb1474f5fed2085715f2987.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_bf301672eede469605ef823057cba1eb3b845f12.600x338.jpg"])
             
         }
     }

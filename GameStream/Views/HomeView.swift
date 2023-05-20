@@ -9,18 +9,14 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var searchText = ""
-    
     var body: some View {
         
         ZStack {
             
-            Spacer()
-            
             Color("marine")
                 .ignoresSafeArea()
             
-            VStack {
+            VStack(spacing: 0) {
                 
                 HStack(spacing: 0.0) {
                     Image("appLogoController")
@@ -31,49 +27,31 @@ struct HomeView: View {
                     Image("appLogo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                    .frame(width: 170)
+                        .frame(width: 170)
                 }
-                .padding(.bottom, 30)
+                .padding(.bottom, 35)
                 
-                HStack {
+                
+                VStack {
                     
-                    Button {
-                        searchButton(searchText: $searchText)
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(searchText.isEmpty ? Color(.white) : Color("dark-cian"))
+                    ScrollView(showsIndicators: false) {
+                        
+                        SubModuleHome()
+                        
                     }
                     
-                    TextField(text: $searchText) {
-                        Text("Buscar video")
-                            .foregroundColor(.gray)
-                    }
-                    .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.white)
-
+                    
                 }
-                .padding([.top, .leading, .bottom], 11.0)
-                .background(Color("blue-gray"))
-                .clipShape(Capsule())
-                .padding(.bottom, 20)
+                .padding(.horizontal, 20)
                 
-                ScrollView(showsIndicators: false) {
-                    SubModuleHome()
-                }
                 
                 
             }
-            .padding(.horizontal, 20)
+            
             
         }
         
-        
     }
-    
-}
-    
-func searchButton(searchText: Binding<String>) {
-    print("Buscando \(searchText.wrappedValue)")
 }
 
 struct HomeView_Previews: PreviewProvider {

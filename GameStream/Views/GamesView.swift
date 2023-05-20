@@ -33,7 +33,7 @@ struct GamesView: View {
     
     let gridForm = [
         
-        GridItem(.flexible(), spacing: 12),
+        GridItem(.flexible(), spacing: 8),
         GridItem(.flexible())
         
     ]
@@ -58,17 +58,17 @@ struct GamesView: View {
                         .aspectRatio(contentMode: .fit)
                     .frame(width: 170)
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, 40)
                 
                 Text("Juegos")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 30)
                 
                 ScrollView {
                     
-                    LazyVGrid(columns: gridForm, spacing: 20) {
+                    LazyVGrid(columns: gridForm, spacing: 18) {
                         
                         ForEach(allGames.gamesInfo, id: \.self) {
                             

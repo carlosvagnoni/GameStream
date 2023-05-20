@@ -13,6 +13,8 @@ struct HomeTabView: View {
     
     var body: some View {
         
+        
+        
         TabView(selection: $tabSeleccionado) {
             
             Text("Perfil")
@@ -55,8 +57,7 @@ struct HomeTabView: View {
                 }
                 .tag(2)
             
-            Text("Favoritos")
-                .font(.system(size: 30, weight: .bold, design: .rounded))
+            FavoritesView()
                 .tabItem {
                     
                     VStack {
@@ -71,18 +72,47 @@ struct HomeTabView: View {
                 .tag(3)
             
         }
-        .onAppear() {
-            
-            UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray.opacity(0.5))
-            
-            UITabBar.appearance().backgroundColor = UIColor(Color("blue-gray"))
-            
-        }
         .tint(.white)
         .navigationBarBackButtonHidden()
         
         
+        
     }
+    
+    init() {
+        
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray.opacity(0.5))
+        
+        let tabBarBackgroundImage = createImage(color: UIColor(Color("blue-gray")), size: CGSize(width: 1, height: 1))
+        
+        UITabBar.appearance().backgroundImage = tabBarBackgroundImage
+        UITabBar.appearance().isTranslucent = true
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        
+        tabBarAppearance.backgroundColor = UIColor(Color("blue-gray"))
+        
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        
+    }
+
+    func createImage(color: UIColor, size: CGSize) -> UIImage {
+        
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image!
+    }
+ 
 }
 
 struct HomeTabView_Previews: PreviewProvider {

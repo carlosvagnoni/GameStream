@@ -13,6 +13,12 @@ struct Games: Codable {
     
 }
 
+struct Results: Codable {
+    
+    var results: [Game]
+    
+}
+
 struct Game: Codable, Hashable {
     
     var title: String
