@@ -23,8 +23,8 @@ struct SignUpView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .font(.headline)
-                        .padding(.bottom, 8)
+                        .font(.title3)
+                        .padding(.bottom, 6)
                     
                     Text("Puedes cambiar o elegirla más adelante")
                         .foregroundColor(.gray)
@@ -43,6 +43,7 @@ struct SignUpView: View {
                             
                             Image(systemName: "camera")
                                 .foregroundColor(.white)
+                                .font(.title)
                         }
                     }
                 }
@@ -102,7 +103,7 @@ struct SignUpView: View {
                         .padding(.bottom, 30)
                 }
                 
-                Spacer(minLength: 60)
+                Spacer(minLength: 40)
                 
                 Button(action: signUp) {
                     
