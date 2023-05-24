@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @State var userName: String = "Lorem"
+    @State var userName: String = ""
     
     var body: some View {
         
@@ -54,6 +54,13 @@ struct ProfileView: View {
                         Text(userName)
                             .padding(.bottom, 40)
                             .foregroundColor(.white)
+                            .onAppear {
+                                
+                                userName = SecurityDataManager.retrieveData()[2]
+                                
+                                
+                                
+                            }
                         
                     }
                     
@@ -73,11 +80,6 @@ struct ProfileView: View {
                 
             }
             
-            
-        }
-        .onAppear {
-            
-            print("Revisando si tengo datos de usuario en mis UserDefaults")
             
         }
         

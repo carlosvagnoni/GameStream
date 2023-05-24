@@ -9,7 +9,11 @@ import SwiftUI
 
 struct EditProfileView: View {
     
+    @State var successfulUpdateDataView = false
+    
     @Environment(\.dismiss) private var dismiss
+    
+    
     
     var body: some View {
         
@@ -18,9 +22,22 @@ struct EditProfileView: View {
             Color("marine")
                 .ignoresSafeArea()
             
-            ScrollView {
+            VStack(spacing: 0) {
                 
-                VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    
+                    Button {
+                        
+                        dismiss()
+                        
+                    } label: {
+                        
+                        Image(systemName: "chevron.left")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 40, trailing: 0))
                     
                     HStack(spacing: 0) {
                         Image("appLogoController")
@@ -33,7 +50,54 @@ struct EditProfileView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 170, height: 23)
                     }
-                    .padding(.bottom, 40)
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 40, trailing: 35))
+                    .frame(maxWidth: .infinity)
+                    .alignmentGuide(.leading) { d in d[HorizontalAlignment.center] }
+                }
+                
+                if successfulUpdateDataView {
+                    
+                    VStack(spacing: 0) {
+                        
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(Color("dark-cian"))
+                            .padding(.bottom, 20)
+                        
+                        Text("MODIFICACIÓN EXITOSA")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(.white)
+                            .padding(.bottom, 20)
+                        
+                        Text("Felicitaciones, tus datos han sido actualizados de manera exitosa.")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 60)
+                        
+                        Button {
+                            
+                            dismiss()
+                            
+                        } label: {
+                            
+                            Text("CONTINUAR")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .font(.title2)
+                                .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
+                                .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("dark-cian"), lineWidth: 1.0).shadow(color: Color("dark-cian"), radius: 5))
+                        }
+                        
+                        Spacer()
+
+                        
+                    }
+                    .padding(.horizontal, 20)
+                    
+                } else {
                     
                     Text("Editar perfil")
                         .fontWeight(.bold)
@@ -59,34 +123,26 @@ struct EditProfileView: View {
                         .padding(.bottom, 40)
                     }
                     
-                    ModuleEdit()
+                    ScrollView {
+                        
+                        VStack(spacing: 0) {
+                            
+                            ModuleEdit(successfulUpdateDataView: $successfulUpdateDataView)
+                            
+                        }
+                        .padding(.horizontal, 20)
+                        
+                    }
                     
                 }
-                .padding(.horizontal, 20)
+                
                 
             }
+            
             
         }
         .navigationBarBackButtonHidden()
-        //Ver tema de barra de navegacion
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                
-                Button {
-                    
-                    dismiss()
-                    
-                } label: {
-                    
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
-                
-                
-            }
-        }
+        
         
     }
     
@@ -94,7 +150,13 @@ struct EditProfileView: View {
 
 struct ModuleEdit: View {
     
+    @Binding var successfulUpdateDataView: Bool
+    
+    @State private var activeAlert: EditProfileAlert?
+    
     @State var email = ""
+    
+    @State var password = ""
     
     @State var userName = ""
     
@@ -128,9 +190,6 @@ struct ModuleEdit: View {
                 .padding(.bottom, 30)
             
         }
-            
-        
-        
         
         VStack(alignment: .leading, spacing: 0) {
             
@@ -140,7 +199,7 @@ struct ModuleEdit: View {
                 .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
                 .padding(.bottom)
             
-            CustomSecureField()
+            CustomSecureField(password: $password)
             
             Divider()
                 .frame(height: 1)
@@ -153,7 +212,7 @@ struct ModuleEdit: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
-                .padding(.bottom)
+                    .padding(.bottom)
                 
                 TextField(text: $userName) {
                     
@@ -166,7 +225,7 @@ struct ModuleEdit: View {
                 .frame(height: 20)
                 .padding(.bottom, 8)
                 .foregroundColor(.white)
-                .textInputAutocapitalization(.never)
+                .textInputAutocapitalization(.words)
                 .autocorrectionDisabled(true)
                 
                 Divider()
@@ -179,7 +238,11 @@ struct ModuleEdit: View {
         
         Spacer(minLength: 40)
         
-        Button(action: updateData) {
+        Button{
+            
+            updateData(successfulUpdateDataView: $successfulUpdateDataView, email: email, password: password, userName: userName, activeAlert: $activeAlert)
+            
+        } label: {
             
             Text("ACTUALIZAR DATOS")
                 .fontWeight(.bold)
@@ -188,14 +251,63 @@ struct ModuleEdit: View {
                 .font(.title2)
                 .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
                 .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("dark-cian"), lineWidth: 1.0).shadow(color: Color("dark-cian"), radius: 5))
+                .alert(item: $activeAlert) { alertType in
+                    switch alertType {
+                    case .incorrectEmailFormat:
+                        return Alert(title: Text("Error"), message: Text("El formato del email no es correcto."), dismissButton: .default(Text("Entendido")))
+                    case .incorrectPasswordFormat:
+                        return Alert(title: Text("Error"), message: Text("El formato de la contraseña no es correcto. La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número."), dismissButton: .default(Text("Entendido")))
+                    case .credentialsSameAsCurrent:
+                        return Alert(title: Text("Error"), message: Text("Las credenciales no pueden ser las mismas que las actuales."), dismissButton: .default(Text("Entendido")))
+                    }
+                }
         }
-        .padding(.bottom, 60)
+        
         
     }
 }
 
-func updateData() {
-    print("Actualizar Datos")
+enum EditProfileAlert: Identifiable {
+    case incorrectEmailFormat
+    case incorrectPasswordFormat
+    case credentialsSameAsCurrent
+    
+    var id: Int {
+        switch self {
+        case .incorrectEmailFormat:
+            return 1
+        case .incorrectPasswordFormat:
+            return 2
+        case .credentialsSameAsCurrent:
+            return 3
+        }
+    }
+}
+
+func updateData(successfulUpdateDataView: Binding<Bool>, email: String, password: String, userName: String, activeAlert: Binding<EditProfileAlert?>) {
+    
+    guard isValidEmail(email) else {
+        
+        activeAlert.wrappedValue = .incorrectEmailFormat
+        return
+    }
+    
+    guard isValidPassword(password) else {
+        
+        activeAlert.wrappedValue = .incorrectPasswordFormat
+        return
+    }
+    
+    guard !SecurityDataManager.validate(email: email, password: password) else {
+        
+        activeAlert.wrappedValue = .credentialsSameAsCurrent
+        return
+    }
+    
+    SecurityDataManager.saveData(email: email, password: password, userName: userName)
+    
+    successfulUpdateDataView.wrappedValue = true
+    
 }
 
 

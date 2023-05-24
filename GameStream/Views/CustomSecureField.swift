@@ -11,7 +11,7 @@ struct CustomSecureField: View {
     
     @State var showPassword: Bool = false
     
-    @State var password = ""
+    @Binding var password: String
     
     var body: some View {
         
@@ -86,7 +86,7 @@ struct CustomSecureField_Previews: PreviewProvider {
             Color("marine")
                 .ignoresSafeArea()
             
-            CustomSecureField()
+            CustomSecureField(password: .constant("prueba"))
             
         }
     }

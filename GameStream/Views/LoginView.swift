@@ -11,7 +11,11 @@ struct LoginView: View {
     
     @State var email = ""
     
+    @State var password = ""
+    
     @State var isHomeViewActive = false
+    
+    @State private var activeAlert: LoginAlert?
     
     var body: some View {
         
@@ -51,7 +55,7 @@ struct LoginView: View {
                     .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
                     .padding(.bottom)
                 
-                CustomSecureField()
+                CustomSecureField(password: $password)
                 
                 Divider()
                     .frame(height: 1)
@@ -71,7 +75,7 @@ struct LoginView: View {
                 
                 Spacer(minLength: 60)
                 
-                Button(action: { login(homeViewStatus: $isHomeViewActive) }, label: {
+                Button(action: { login(homeViewStatus: $isHomeViewActive, email: email, password: password, activeAlert: $activeAlert) }, label: {
                     
                     Text("INICIAR SESIÓN")
                         .fontWeight(.bold)
@@ -82,6 +86,12 @@ struct LoginView: View {
                         .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("dark-cian"), lineWidth: 1.0).shadow(color: Color("dark-cian"), radius: 5))
                 })
                 .padding(.bottom, 60)
+                .alert(item: $activeAlert) { alertType in
+                    switch alertType {
+                    case .incorrectCredentials:
+                        return Alert(title: Text("Error"), message: Text("Las credenciales son incorrectas."), dismissButton: .default(Text("Entendido")))
+                    }
+                }
                 
                 
                 VStack {
@@ -129,10 +139,34 @@ struct LoginView: View {
             EmptyView()
         }
     }
+    
+    
 }
 
-func login(homeViewStatus: Binding<Bool>) {
-    homeViewStatus.wrappedValue = true
+enum LoginAlert: Identifiable {
+    case incorrectCredentials
+
+    var id: Int {
+        switch self {
+        case .incorrectCredentials:
+            return 1
+        }
+    }
+}
+
+func login(homeViewStatus: Binding<Bool>, email: String, password: String, activeAlert: Binding<LoginAlert?>) {
+    
+    if SecurityDataManager.validate(email: email, password: password) {
+        
+        homeViewStatus.wrappedValue = true
+        
+    } else {
+        
+        activeAlert.wrappedValue = .incorrectCredentials
+        
+    }
+    
+    
 }
 
 func facebookLogin() {

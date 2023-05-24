@@ -27,6 +27,7 @@
 		DDEFB6132A0F3989003845A1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6122A0F3989003845A1 /* Model.swift */; };
 		DDEFB6152A0F39B5003845A1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6142A0F39B5003845A1 /* ViewModel.swift */; };
 		DDEFB6172A0F39EF003845A1 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6162A0F39EF003845A1 /* GamesView.swift */; };
+		DDF10B2C2A1A5A0700E0B6B4 /* SecurityDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		DDEFB6122A0F3989003845A1 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DDEFB6142A0F39B5003845A1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DDEFB6162A0F39EF003845A1 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
+		DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				DDEFB6142A0F39B5003845A1 /* ViewModel.swift */,
 				DDEE830F2A13920A005FF3D6 /* SearchGame.swift */,
+				DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				DDBD1C6E2A0F9B58002E849B /* CustomSecureField.swift in Sources */,
 				DD79A9512A1863BF00A5D8D0 /* FavoritesView.swift in Sources */,
 				DDB1AD642A10877000F442AC /* GameView.swift in Sources */,
+				DDF10B2C2A1A5A0700E0B6B4 /* SecurityDataManager.swift in Sources */,
 				DDEFB6132A0F3989003845A1 /* Model.swift in Sources */,
 				DD243F172A11BBF200AA398B /* CommentsDataModel.swift in Sources */,
 			);

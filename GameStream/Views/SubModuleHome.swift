@@ -67,9 +67,9 @@ struct SubModuleHome: View {
                 .alert(item: $activeAlert) { alertType in
                     switch alertType {
                     case .gameNotFound:
-                        return Alert(title: Text("Error"), message: Text("No se encontró el juego"), dismissButton: .default(Text("OK")))
+                        return Alert(title: Text("Error"), message: Text("No se encontró el juego"), dismissButton: .default(Text("Entendido")))
                     case .searchTextEmpty:
-                        return Alert(title: Text("Error"), message: Text("El campo de búsqueda no puede estar vacío"), dismissButton: .default(Text("OK")))
+                        return Alert(title: Text("Error"), message: Text("El campo de búsqueda no puede estar vacío"), dismissButton: .default(Text("Entendido")))
                     }
                 }
                 

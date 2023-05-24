@@ -50,7 +50,7 @@ struct LoginAndSignUpView: View {
                 
             } else {
                 
-                SignUpView()
+                SignUpView(loginType: $loginType)
                 
             }
         }
