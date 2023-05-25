@@ -58,7 +58,7 @@ struct GamesView: View {
                         .aspectRatio(contentMode: .fit)
                     .frame(width: 170)
                 }
-                .padding(.bottom, 40)
+                .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0))
                 
                 Text("Juegos")
                     .font(.largeTitle)

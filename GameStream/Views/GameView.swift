@@ -43,11 +43,11 @@ struct GameView: View {
             
             VStack(spacing: 0) {
                 
-                GameVideo(url: url)
-                    .aspectRatio(contentMode: .fill)
-                    .padding(.bottom, 20)
-                
                 ScrollView {
+                    
+                    GameVideo(url: url)
+                        .aspectRatio(contentMode: .fill)
+                        .ignoresSafeArea()
                     
                     VStack(spacing: 0) {
                         
@@ -64,28 +64,28 @@ struct GameView: View {
                     
                 }
                 .frame(maxWidth: .infinity)
+                .ignoresSafeArea(.all, edges: .top)
             }
             
         }
-        .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true) 
+        .overlay(
+
+            Button {
                 
-                Button {
-                    
-                    dismiss()
-                    
-                } label: {
-                    
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
+                dismiss()
                 
+            } label: {
                 
+                Image(systemName: "chevron.left")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
             }
-        }
+            .padding(EdgeInsets(top: 0, leading: 20, bottom: 40, trailing: 0)),
+            alignment: .topLeading
+        )
         .onChange(of: title) { newValue in
             favorite = favoritesManager.isFavorite(gameTitle: newValue)
         }
@@ -107,8 +107,7 @@ struct GameVideo: View {
             if let validURL = videoURL {
                 
                 VideoPlayer(player: AVPlayer(url: validURL))
-                    .ignoresSafeArea()
-                    .frame(maxHeight: 500)
+                    .aspectRatio(16/9, contentMode: .fit)
                     .onDisappear {
                         AVPlayer(url: validURL).pause()
                     }
@@ -275,7 +274,6 @@ struct VideoInfo: View {
         
     }
 }
-
 
 struct GalleryImages: View {
     

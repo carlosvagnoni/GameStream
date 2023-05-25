@@ -12,6 +12,7 @@
 		DD3AF48D2A1EAF0200CBCFC8 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */; };
 		DD6BA8F52A0CFA3B00DB5E88 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */; };
 		DD79A9512A1863BF00A5D8D0 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79A9502A1863BF00A5D8D0 /* FavoritesView.swift */; };
+		DD8FE3E22A1FDAE80050CE97 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8FE3E12A1FDAE80050CE97 /* VideoPlayerViewModel.swift */; };
 		DD9683062A0B09670005FC21 /* GameStreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9683052A0B09670005FC21 /* GameStreamApp.swift */; };
 		DD9683082A0B09670005FC21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9683072A0B09670005FC21 /* ContentView.swift */; };
 		DD96830A2A0B09670005FC21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD9683092A0B09670005FC21 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DD79A9502A1863BF00A5D8D0 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		DD8FE3E12A1FDAE80050CE97 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
 		DD9683022A0B09670005FC21 /* GameStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD9683052A0B09670005FC21 /* GameStreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStreamApp.swift; sourceTree = "<group>"; };
 		DD9683072A0B09670005FC21 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				DDEE830F2A13920A005FF3D6 /* SearchGame.swift */,
 				DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */,
 				DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */,
+				DD8FE3E12A1FDAE80050CE97 /* VideoPlayerViewModel.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD8FE3E22A1FDAE80050CE97 /* VideoPlayerViewModel.swift in Sources */,
 				DD26DECD2A196F4400792BF5 /* EditProfileView.swift in Sources */,
 				DDEFB6172A0F39EF003845A1 /* GamesView.swift in Sources */,
 				DDEFB6152A0F39B5003845A1 /* ViewModel.swift in Sources */,

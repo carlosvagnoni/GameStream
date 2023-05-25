@@ -90,9 +90,6 @@ struct SubModuleHome: View {
             .background(Color("blue-gray"))
             .clipShape(Capsule())
 
-            
-            //A PARTIR DE AQUI
-            
             ZStack {
                 
                 VStack(spacing: 0) {
@@ -163,17 +160,17 @@ struct SubModuleHome: View {
                                     
                                     RoundedRectangle(cornerRadius: 8)
                                         .fill(Color("blue-gray"))
-                                        .frame(width: 200, height: 130)
+                                        .frame(width: 110, height: 85)
                                     
                                     VStack {
                                         
                                         Image("appLogoController")
                                             . resizable()
                                             .scaledToFit()
-                                            .frame(width: 42, height: 42)
+                                            .frame(width: 20, height: 20)
                                         
                                         Text("CATEGORY")
-                                            .font(.title3)
+                                            .font(.footnote)
                                             .fontWeight(.bold)
                                             .foregroundColor(Color("dark-cian"))
                                     }
@@ -191,17 +188,17 @@ struct SubModuleHome: View {
                                     
                                     RoundedRectangle(cornerRadius: 8)
                                         .fill(Color("blue-gray"))
-                                        .frame(width: 200, height: 130)
+                                        .frame(width: 110, height: 85)
                                     
                                     VStack {
                                         
                                         Image("fps")
                                             . resizable()
                                             .scaledToFit()
-                                            .frame(width: 42, height: 42)
+                                            .frame(width: 20, height: 20)
                                         
                                         Text("FPS")
-                                            .font(.title3)
+                                            .font(.footnote)
                                             .fontWeight(.bold)
                                             .foregroundColor(Color("dark-cian"))
                                     }
@@ -219,17 +216,17 @@ struct SubModuleHome: View {
                                     
                                     RoundedRectangle(cornerRadius: 8)
                                         .fill(Color("blue-gray"))
-                                        .frame(width: 200, height: 130)
+                                        .frame(width: 110, height: 85)
                                     
                                     VStack {
                                         
                                         Image("rpg-icon")
                                             . resizable()
                                             .scaledToFit()
-                                            .frame(width: 42, height: 42)
+                                            .frame(width: 20, height: 20)
                                         
                                         Text("RPG")
-                                            .font(.title3)
+                                            .font(.footnote)
                                             .fontWeight(.bold)
                                             .foregroundColor(Color("dark-cian"))
                                     }
@@ -247,17 +244,17 @@ struct SubModuleHome: View {
                                     
                                     RoundedRectangle(cornerRadius: 8)
                                         .fill(Color("blue-gray"))
-                                        .frame(width: 200, height: 130)
+                                        .frame(width: 110, height: 85)
                                     
                                     VStack {
                                         
                                         Image("open-world-icon")
                                             . resizable()
                                             .scaledToFit()
-                                            .frame(width: 42, height: 42)
+                                            .frame(width: 20, height: 20)
                                         
                                         Text("OPEN WORLD")
-                                            .font(.title3)
+                                            .font(.footnote)
                                             .fontWeight(.bold)
                                             .foregroundColor(Color("dark-cian"))
                                     }

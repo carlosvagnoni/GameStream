@@ -50,7 +50,7 @@ struct EditProfileView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 170, height: 23)
                     }
-                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 40, trailing: 35))
+                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 35))
                     .frame(maxWidth: .infinity)
                     .alignmentGuide(.leading) { d in d[HorizontalAlignment.center] }
                 }

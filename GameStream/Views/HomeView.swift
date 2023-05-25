@@ -29,7 +29,7 @@ struct HomeView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 170)
                 }
-                .padding(.bottom, 35)
+                .padding(EdgeInsets(top: 10, leading: 0, bottom: 35, trailing: 0))
                 
                 
                 VStack {

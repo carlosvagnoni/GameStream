@@ -34,7 +34,7 @@ struct ContentView: View {
                             .aspectRatio(contentMode: .fit)
                         .frame(width: 170)
                     }
-                    .padding(.bottom, 60)
+                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 60, trailing: 0))
                     
                     LoginAndSignUpView()
                     
