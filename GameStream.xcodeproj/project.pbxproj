@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DD243F172A11BBF200AA398B /* CommentsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD243F162A11BBF200AA398B /* CommentsDataModel.swift */; };
 		DD26DECD2A196F4400792BF5 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26DECC2A196F4400792BF5 /* EditProfileView.swift */; };
+		DD3AF48D2A1EAF0200CBCFC8 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */; };
 		DD6BA8F52A0CFA3B00DB5E88 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */; };
 		DD79A9512A1863BF00A5D8D0 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79A9502A1863BF00A5D8D0 /* FavoritesView.swift */; };
 		DD9683062A0B09670005FC21 /* GameStreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9683052A0B09670005FC21 /* GameStreamApp.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		DD243F162A11BBF200AA398B /* CommentsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsDataModel.swift; sourceTree = "<group>"; };
 		DD26DECC2A196F4400792BF5 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DD79A9502A1863BF00A5D8D0 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		DD9683022A0B09670005FC21 /* GameStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +140,7 @@
 				DDEFB6142A0F39B5003845A1 /* ViewModel.swift */,
 				DDEE830F2A13920A005FF3D6 /* SearchGame.swift */,
 				DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */,
+				DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				DDBD1C742A0FA050002E849B /* SubModuleHome.swift in Sources */,
 				DDBD1C702A0F9C1F002E849B /* SignUpView.swift in Sources */,
 				DDA21BA02A18F2B5007DE61C /* ProfileView.swift in Sources */,
+				DD3AF48D2A1EAF0200CBCFC8 /* FavoritesManager.swift in Sources */,
 				DDBD1C6C2A0F9A3B002E849B /* LoginView.swift in Sources */,
 				DDEE83102A13920A005FF3D6 /* SearchGame.swift in Sources */,
 				DDBD1C6E2A0F9B58002E849B /* CustomSecureField.swift in Sources */,

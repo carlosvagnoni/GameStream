@@ -14,6 +14,8 @@ struct SubModuleHome: View {
     
     @State var searchText = ""
     
+    @ObservedObject var allGames = ViewModel()
+    
     @ObservedObject var foundGame = SearchGame()
     
     @State var isGameViewActive = false
@@ -74,7 +76,7 @@ struct SubModuleHome: View {
                 }
                 
                 TextField(text: $searchText) {
-                    Text("Buscar video")
+                    Text("Buscar juego")
                         .foregroundColor(.gray)
                 }
                 .font(/*@START_MENU_TOKEN@*/.subheadline/*@END_MENU_TOKEN@*/)
@@ -82,403 +84,477 @@ struct SubModuleHome: View {
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled(true)
 
+
             }
             .padding([.top, .leading, .bottom], 11.0)
             .background(Color("blue-gray"))
             .clipShape(Capsule())
-            .padding(.bottom, 35)
+
             
-            Text("LOS MÁS POPULARES")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 15)
+            //A PARTIR DE AQUI
             
-            
-            Button {
+            ZStack {
                 
-                watchGame(name: "The Witcher 3")
+                VStack(spacing: 0) {
+                    
+                    Text("LOS MÁS POPULARES")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding(EdgeInsets(top: 35, leading: 0, bottom: 15, trailing: 0))
+                    
+                    
+                    Button {
+                        
+                        watchGame(name: "The Witcher 3")
+                        
+                    } label: {
+                        
+                        ZStack {
+                            
+                            VStack(spacing: 0) {
+                                
+                                Image("The Witcher 3")
+                                    .resizable()
+                                    .scaledToFill()
+                                
+                                Text("The Witcher 3: Wild Hunt")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                                    .frame(height: 40)
+                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                    .font(.headline)
+                                    .padding(.leading, 10)
+                                    .background(Color("blue-gray"))
+                                
+                            }
+                            
+                            Image(systemName: "play.circle.fill")
+                                .resizable()
+                                .foregroundColor(.white)
+                                .frame(width: 50, height: 50)
+                            
+                            
+                        }
+                        
+                    }
+                    .padding(.bottom, 30)
+                    
+                    Text("CATEGORÍAS SUGERIDAS PARA TI")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom, 15)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        
+                        HStack {
+                            
+                            
+                            Button {
+                                
+                                print("Categoria 1")
+                                
+                            } label: {
+                                
+                                ZStack {
+                                    
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color("blue-gray"))
+                                        .frame(width: 200, height: 130)
+                                    
+                                    VStack {
+                                        
+                                        Image("appLogoController")
+                                            . resizable()
+                                            .scaledToFit()
+                                            .frame(width: 42, height: 42)
+                                        
+                                        Text("CATEGORY")
+                                            .font(.title3)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color("dark-cian"))
+                                    }
+                                }
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Categoria 2")
+                                
+                            } label: {
+                                
+                                ZStack {
+                                    
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color("blue-gray"))
+                                        .frame(width: 200, height: 130)
+                                    
+                                    VStack {
+                                        
+                                        Image("fps")
+                                            . resizable()
+                                            .scaledToFit()
+                                            .frame(width: 42, height: 42)
+                                        
+                                        Text("FPS")
+                                            .font(.title3)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color("dark-cian"))
+                                    }
+                                }
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Categoria 3")
+                                
+                            } label: {
+                                
+                                ZStack {
+                                    
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color("blue-gray"))
+                                        .frame(width: 200, height: 130)
+                                    
+                                    VStack {
+                                        
+                                        Image("rpg-icon")
+                                            . resizable()
+                                            .scaledToFit()
+                                            .frame(width: 42, height: 42)
+                                        
+                                        Text("RPG")
+                                            .font(.title3)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color("dark-cian"))
+                                    }
+                                }
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Categoria 4")
+                                
+                            } label: {
+                                
+                                ZStack {
+                                    
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color("blue-gray"))
+                                        .frame(width: 200, height: 130)
+                                    
+                                    VStack {
+                                        
+                                        Image("open-world-icon")
+                                            . resizable()
+                                            .scaledToFit()
+                                            .frame(width: 42, height: 42)
+                                        
+                                        Text("OPEN WORLD")
+                                            .font(.title3)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color("dark-cian"))
+                                    }
+                                }
+                                
+                            }
+                            
+                            
+                            
+                            
+                        }
+                        
+                    }
+                    .padding(.bottom, 30)
+                    
+                    Text("RECOMENDADO PARA TI")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom, 15)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        
+                        HStack {
+                            
+                            Button {
+                                
+                                watchGame(name: "Abzu")
+                                
+                            } label: {
+                                
+                                Image("Abzu")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                watchGame(name: "Crash Bandicoot")
+                                
+                            } label: {
+                                
+                                Image("Crash Bandicoot")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                watchGame(name: "DEATH STRANDING")
+                                
+                            } label: {
+                                
+                                Image("DEATH STRANDING")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                watchGame(name: "Cuphead")
+                                
+                            } label: {
+                                
+                                Image("Cuphead")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                watchGame(name: "Hades")
+                                
+                            } label: {
+                                
+                                Image("Hades")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                watchGame(name: "Grand Theft Auto V")
+                                
+                            } label: {
+                                
+                                Image("Grand Theft Auto V")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                    .padding(.bottom, 30)
+                    
+                    Text("JUEGOS QUE PODRÍAN GUSTARTE")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom, 15)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        
+                        HStack {
+                            
+                            Button {
+                                
+                                print("Ir a juego 1")
+                                
+                            } label: {
+                                
+                                Image("tlouii")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 2")
+                                
+                            } label: {
+                                
+                                Image("destiny")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 3")
+                                
+                            } label: {
+                                
+                                Image("spiderman")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 4")
+                                
+                            } label: {
+                                
+                                Image("titanfall2")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 5")
+                                
+                            } label: {
+                                
+                                Image("uncharted4")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 6")
+                                
+                            } label: {
+                                
+                                Image("assassinscreed")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 7")
+                                
+                            } label: {
+                                
+                                Image("farcry4")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            Button {
+                                
+                                print("Ir a juego 8")
+                                
+                            } label: {
+                                
+                                Image("battlefield6")
+                                    .resizable()
+                                    .frame(width: 240, height: 135)
+                                    .cornerRadius(8)
+                                
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                    .padding(.bottom, 30)
+                    
+                }
                 
-            } label: {
-                
-                ZStack {
+                if !searchText.isEmpty {
                     
                     VStack(spacing: 0) {
                         
-                        Image("The Witcher 3")
-                            .resizable()
-                            .scaledToFill()
-                        
-                        Text("The Witcher 3: Wild Hunt")
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .frame(height: 40)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .font(.headline)
-                            .padding(.leading, 10)
-                            .background(Color("blue-gray"))
-                        
-                    }
-                    
-                    Image(systemName: "play.circle.fill")
-                        .resizable()
-                        .foregroundColor(.white)
-                        .frame(width: 50, height: 50)
-                    
-                    
-                }
-                
-            }
-            .padding(.bottom, 30)
-            
-            Text("CATEGORÍAS SUGERIDAS PARA TI")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 15)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                
-                HStack {
-                    
-                    
-                    Button {
-                        
-                        print("Categoria 1")
-                        
-                    } label: {
-                        
-                        ZStack {
+                        VStack(spacing: 0) {
                             
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("blue-gray"))
-                                .frame(width: 200, height: 130)
-                            
-                            VStack {
+                            ForEach(allGames.gamesInfo.filter({ game in
+                                game.title.lowercased().starts(with: searchText.lowercased())
                                 
-                                Image("appLogoController")
-                                    . resizable()
-                                    .scaledToFit()
-                                    .frame(width: 42, height: 42)
-                                
-                                Text("CATEGORY")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color("dark-cian"))
+                            }), id: \.self) { game in
+                                Button {
+                                    
+                                    url = game.videosUrls.mobile
+                                    title = game.title
+                                    studio = game.studio
+                                    contentRaiting = game.contentRaiting
+                                    publicationYear = game.publicationYear
+                                    description = game.description
+                                    platforms = game.platforms
+                                    tags = game.tags
+                                    galleryImages = game.galleryImages
+                                    
+                                    isGameViewActive = true
+                                    
+                                } label: {
+                                    
+                                    VStack(spacing: 0) {
+                                        
+                                        HStack(spacing: 0) {
+                                            
+                                            Text("\(game.title)")
+                                                .padding(.leading, 20)
+                                                .font(.subheadline)
+                                                .foregroundColor(.white)
+                                            
+                                            Spacer()         
+                                            
+                                            Image(systemName: "magnifyingglass")
+                                                .foregroundColor(Color("dark-cian"))
+                                                .padding(.trailing, 20)
+                                            
+                                        }
+                                        .frame(height: 40)
+                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                        .background(Color("blue-gray").opacity(1.8))
+                                        
+                                            
+                                        
+                                    }
+                                }
                             }
                         }
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .padding(.top, 5)
                         
-                    }
-                    
-                    Button {
-                        
-                        print("Categoria 2")
-                        
-                    } label: {
-                        
-                        ZStack {
-                            
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("blue-gray"))
-                                .frame(width: 200, height: 130)
-                            
-                            VStack {
-                                
-                                Image("fps")
-                                    . resizable()
-                                    .scaledToFit()
-                                    .frame(width: 42, height: 42)
-                                
-                                Text("FPS")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color("dark-cian"))
-                            }
-                        }
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Categoria 3")
-                        
-                    } label: {
-                        
-                        ZStack {
-                            
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("blue-gray"))
-                                .frame(width: 200, height: 130)
-                            
-                            VStack {
-                                
-                                Image("rpg-icon")
-                                    . resizable()
-                                    .scaledToFit()
-                                    .frame(width: 42, height: 42)
-                                
-                                Text("RPG")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color("dark-cian"))
-                            }
-                        }
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Categoria 4")
-                        
-                    } label: {
-                        
-                        ZStack {
-                            
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color("blue-gray"))
-                                .frame(width: 200, height: 130)
-                            
-                            VStack {
-                                
-                                Image("open-world-icon")
-                                    . resizable()
-                                    .scaledToFit()
-                                    .frame(width: 42, height: 42)
-                                
-                                Text("OPEN WORLD")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color("dark-cian"))
-                            }
-                        }
-                        
-                    }
-                    
-                    
-                    
-                    
-                }
-                
-            }
-            .padding(.bottom, 30)
-            
-            Text("RECOMENDADO PARA TI")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 15)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                
-                HStack {
-                    
-                    Button {
-                        
-                        watchGame(name: "Abzu")
-                        
-                    } label: {
-                        
-                        Image("Abzu")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        watchGame(name: "Crash Bandicoot")
-                        
-                    } label: {
-                        
-                        Image("Crash Bandicoot")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        watchGame(name: "DEATH STRANDING")
-                        
-                    } label: {
-                        
-                        Image("DEATH STRANDING")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        watchGame(name: "Cuphead")
-                        
-                    } label: {
-                        
-                        Image("Cuphead")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        watchGame(name: "Hades")
-                        
-                    } label: {
-                        
-                        Image("Hades")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        watchGame(name: "Grand Theft Auto V")
-                        
-                    } label: {
-                        
-                        Image("Grand Theft Auto V")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
+                        Spacer()
                     }
                     
                     
                 }
                 
             }
-            .padding(.bottom, 30)
             
-            Text("JUEGOS QUE PODRÍAN GUSTARTE")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 15)
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                
-                HStack {
-                    
-                    Button {
-                        
-                        print("Ir a juego 1")
-                        
-                    } label: {
-                        
-                        Image("tlouii")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Ir a juego 2")
-                        
-                    } label: {
-                        
-                        Image("destiny")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Ir a juego 3")
-                        
-                    } label: {
-                        
-                        Image("spiderman")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Ir a juego 4")
-                        
-                    } label: {
-                        
-                        Image("titanfall2")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Ir a juego 5")
-                        
-                    } label: {
-                        
-                        Image("uncharted4")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Ir a juego 6")
-                        
-                    } label: {
-                        
-                        Image("assassinscreed")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Ir a juego 7")
-                        
-                    } label: {
-                        
-                        Image("farcry4")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    Button {
-                        
-                        print("Ir a juego 8")
-                        
-                    } label: {
-                        
-                        Image("battlefield6")
-                            .resizable()
-                            .frame(width: 240, height: 135)
-                            .cornerRadius(8)
-                        
-                    }
-                    
-                    
-                }
-                
-            }
-            .padding(.bottom, 30)
             
             
         }

@@ -12,6 +12,10 @@ struct GameView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @EnvironmentObject var favoritesManager: FavoritesManager
+    
+    @State private var favorite: Bool = false
+    
     var url: String
     
     var title: String
@@ -42,12 +46,12 @@ struct GameView: View {
                 GameVideo(url: url)
                     .aspectRatio(contentMode: .fill)
                     .padding(.bottom, 20)
-                                
+                
                 ScrollView {
                     
                     VStack(spacing: 0) {
                         
-                        VideoInfo(title: title, studio: studio, contentRaiting: contentRaiting, publicationYear: publicationYear, description: description, platforms: platforms, tags: tags)
+                        VideoInfo(favorite: $favorite, title: title, studio: studio, contentRaiting: contentRaiting, publicationYear: publicationYear, description: description, platforms: platforms, tags: tags)
                         
                         GalleryImages(galleryImages: galleryImages)
                         
@@ -82,8 +86,12 @@ struct GameView: View {
                 
             }
         }
+        .onChange(of: title) { newValue in
+            favorite = favoritesManager.isFavorite(gameTitle: newValue)
+        }
         
     }
+        
 }
 
 struct GameVideo: View {
@@ -112,6 +120,10 @@ struct GameVideo: View {
 
 struct VideoInfo: View {
     
+    @EnvironmentObject var favoritesManager: FavoritesManager
+    
+    @Binding var favorite: Bool
+    
     var title: String
     
     var studio: String
@@ -130,12 +142,50 @@ struct VideoInfo: View {
         
         VStack(spacing: 0) {
             
-            Text(title)
-                .font(.largeTitle)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .padding(.bottom, 10)
+            HStack(spacing: 0) {
+                
+                Text(title)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                
+                Spacer()
+                
+                Button {
+                    
+                    favorite.toggle()
+                    
+                    if favorite {
+                        
+                        favoritesManager.addFavorite(gameTitle: title)
+                        
+                    } else {
+                        
+                        favoritesManager.removeFavorite(gameTitle: title)
+                        
+                    }
+                    
+                } label: {
+                    
+                    if favorite {
+                        
+                        Image(systemName: "heart.fill")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                        
+                    } else {
+                        
+                        Image(systemName: "heart")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                        
+                    }
+                }
+
+                
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .padding(.bottom, 10)
             
             HStack {
                 
@@ -225,6 +275,7 @@ struct VideoInfo: View {
         
     }
 }
+
 
 struct GalleryImages: View {
     
@@ -482,6 +533,7 @@ struct GameView_Previews: PreviewProvider {
         
         GameView(url: "ejemplo", title: "Crash Bandicoot™ N. Sane Trilogy", studio: "Sega", contentRaiting: "E+", publicationYear: "1991", description: "Juego de Sega Genesis publicado en 1991 con más de 40 millones de copias vendidas actualmente", platforms:  ["PC", "Playstation 4"], tags: ["plataformas","mascota"], galleryImages: [ "https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_fad459eb04408dd926de3b789c8bc6d13bf855c0.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_931f13ad19753ac5d491bc55e31ec9e2181ca637.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_c2439741a40a81e4772412b4a92866aa1f188f2f.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_1a5bd0956c774afcadb1474f5fed2085715f2987.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_bf301672eede469605ef823057cba1eb3b845f12.600x338.jpg"
                                                                                                                                                                                                                                                                                                                                 ])
+        .environmentObject(FavoritesManager())
         
     }
 }

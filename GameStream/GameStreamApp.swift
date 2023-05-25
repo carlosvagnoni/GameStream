@@ -12,6 +12,7 @@ struct GameStreamApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(FavoritesManager())
         }
     }
 }

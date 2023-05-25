@@ -10,6 +10,8 @@ import AVKit
 
 struct FavoritesView: View {
     
+    @EnvironmentObject var favoritesManager: FavoritesManager
+    
     @ObservedObject var allGames = ViewModel()
     
     var body: some View {
@@ -47,7 +49,7 @@ struct FavoritesView: View {
                 
                 ScrollView {
                     
-                    ForEach(allGames.gamesInfo, id: \.self) { game in
+                    ForEach(allGames.gamesInfo.filter({ favoritesManager.favorites.contains($0.title) }), id: \.self) { game in
                         
                         VStack(spacing: 0) {
                             
@@ -85,6 +87,7 @@ struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
         
         FavoritesView()
+            .environmentObject(FavoritesManager())
         
     }
 }
