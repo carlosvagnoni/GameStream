@@ -9,39 +9,58 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var isActive: Bool = false
+    
     var body: some View {
         
-
-        NavigationStack {
-            
-            ZStack {
-                
-                Spacer()
-                
-                Color("marine")
-                    .ignoresSafeArea()
-                
-                VStack {
-                    
-                    HStack(spacing: 0.0) {
-                        Image("appLogoController")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 23)
-                            .padding(.trailing, 10.0)
-                        Image("appLogo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                        .frame(width: 170)
+        VStack {
+                    if self.isActive {
+                        
+                        MainView()
+                        
+                    } else {
+                        
+                        SplashScreenView()
+                        
                     }
-                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 60, trailing: 0))
-                    
-                    LoginAndSignUpView()
-                    
                 }
+                .onAppear {
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        withAnimation {
+
+                            self.isActive = true
+
+                        }
+                    }
+                }
+        
+    }
+}
+
+struct SplashScreenView: View {
+    
+    var body: some View {
+        
+        ZStack {
+            
+            Color("marine")
+                .ignoresSafeArea()
+            
+            HStack(spacing: 0.0) {
+                Image("appLogoController")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 23)
+                    .padding(.trailing, 10.0)
+                Image("appLogo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                .frame(width: 170)
             }
             
         }
+        
     }
 }
 
