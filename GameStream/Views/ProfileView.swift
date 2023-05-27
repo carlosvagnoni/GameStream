@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @State var userName: String = ""
+    @EnvironmentObject var profilePhotoManager: ProfilePhotoManager
+    
+    @StateObject var userNameManager = UserNameManager()
     
     var body: some View {
         
@@ -48,23 +50,28 @@ struct ProfileView: View {
                             
                             VStack(spacing: 0) {
                                 
-                                Image("exampleProfilePhoto")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 80, height: 80)
-                                    .clipShape(Circle())
-                                    .padding(.bottom, 15)
+                                if let savedProfilePhotoData = profilePhotoManager.photoData,
+                                    let savedProfilePhoto = UIImage(data: savedProfilePhotoData) {
+                                    Image(uiImage: savedProfilePhoto)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 80, height: 80)
+                                        .clipShape(Circle())
+                                } else {
+                                    Image("exampleProfilePhoto")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 80, height: 80)
+                                        .clipShape(Circle())
+                                }
                                 
-                                Text(userName)
-                                    .padding(.bottom, 40)
+                                Text(userNameManager.userName)
                                     .foregroundColor(.white)
+                                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0))
                                     .onAppear {
-                                        
-                                        userName = SecurityDataManager.retrieveData()[2]
-                                        
-                                        
-                                        
-                                    }
+                                                userNameManager.updateUserNameFromKeychain()
+                                            }
+                                    
                                 
                             }
                             
@@ -237,6 +244,8 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         
         ProfileView()
+            .environmentObject(FavoritesManager())
+            .environmentObject(ProfilePhotoManager())
         
     }
 }

@@ -13,6 +13,7 @@ struct GameStreamApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(FavoritesManager())
+                .environmentObject(ProfilePhotoManager())
         }
     }
 }

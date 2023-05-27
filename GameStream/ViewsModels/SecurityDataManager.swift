@@ -88,3 +88,21 @@ class SecurityDataManager {
         return email == savedEmail && password == savedPassword
     }
 }
+
+class UserNameManager: ObservableObject {
+    @Published var userName: String = ""
+
+    init() {
+        let userData = SecurityDataManager.retrieveData()
+        if userData.count > 2 {
+            userName = userData[2]
+        }
+    }
+    
+    func updateUserNameFromKeychain() {
+        let userData = SecurityDataManager.retrieveData()
+        if userData.count > 2 {
+            userName = userData[2]
+        }
+    }
+}

@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct SignUpView: View {
+    
+    @State var selectedItem: PhotosPickerItem?
+    
+    @State private var selectedPhotoData: Data?
     
     @Binding var loginType: Bool
     
@@ -20,6 +25,8 @@ struct SignUpView: View {
     @State var successfulSignUpView = false
     
     @State private var activeAlert: SignUpAlert?
+    
+    @EnvironmentObject var profilePhotoManager: ProfilePhotoManager
     
     var body: some View {
         
@@ -88,19 +95,46 @@ struct SignUpView: View {
                             .font(.subheadline)
                             .padding(.bottom, 25)
                         
-                        Button(action: takePhoto) {
+                        ZStack {
                             
-                            ZStack {
-                                
+                            if let selectedPhotoData = selectedPhotoData,
+                               let image = UIImage(data: selectedPhotoData) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                            } else {
                                 Image("exampleProfilePhoto")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                            }
+                            
+                            
+                            
+                            PhotosPicker(selection: $selectedItem,
+                                         matching: .images) {
                                 
                                 Image(systemName: "camera")
                                     .foregroundColor(.white)
                                     .font(.title)
+                                    .fontWeight(.bold)
+                                
                             }
+                                         .onChange(of: selectedItem) { newItem in
+                                             Task {
+                                                 
+                                                 if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                                                     
+                                                     selectedPhotoData = data
+
+                                                 }
+                                             }
+                                         }
+                            
+                            
                         }
                     }
                     .padding(.bottom, 60)
@@ -162,7 +196,7 @@ struct SignUpView: View {
                     Spacer(minLength: 40)
                     
                     Button {
-                        signUp(successfulSignUpView: $successfulSignUpView, email: email, password: password, confirmedPassword: confirmedPassword, activeAlert: $activeAlert)
+                        signUp(successfulSignUpView: $successfulSignUpView, email: email, password: password, confirmedPassword: confirmedPassword, activeAlert: $activeAlert, selectedPhotoData: selectedPhotoData, profilePhotoManager: profilePhotoManager)
                     } label: {
                         
                         Text("REGÍSTRATE")
@@ -252,7 +286,7 @@ func takePhoto() {
     print("Tomar foto")
 }
 
-func signUp(successfulSignUpView: Binding<Bool>, email: String, password: String, confirmedPassword: String, activeAlert: Binding<SignUpAlert?>) {
+func signUp(successfulSignUpView: Binding<Bool>, email: String, password: String, confirmedPassword: String, activeAlert: Binding<SignUpAlert?>, selectedPhotoData: Data?, profilePhotoManager: ProfilePhotoManager) {
     
     guard isValidEmail(email) else {
         
@@ -271,6 +305,12 @@ func signUp(successfulSignUpView: Binding<Bool>, email: String, password: String
         activeAlert.wrappedValue = .passwordsDoNotMatch
         return
     }
+    
+    if let data = selectedPhotoData {
+            profilePhotoManager.saveProfilePhoto(data)
+        } else {
+            profilePhotoManager.deleteProfilePhoto()
+        }
     
     SecurityDataManager.saveData(email: email, password: password, userName: email)
     
@@ -311,7 +351,7 @@ struct SignUpView_Previews: PreviewProvider {
                 .ignoresSafeArea()
             
             SignUpView(loginType: .constant(false))
-            
+                .environmentObject(ProfilePhotoManager())
         }
     }
 }
