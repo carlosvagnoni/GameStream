@@ -10,17 +10,14 @@ import PhotosUI
 
 struct EditProfileView: View {
     
-    @EnvironmentObject var profilePhotoManager: ProfilePhotoManager
-    
-    @State var selectedItem: PhotosPickerItem?
-    
-    @State private var selectedPhotoData: Data?
-    
-    @State var successfulUpdateDataView = false
-    
     @Environment(\.dismiss) private var dismiss
     
+    @EnvironmentObject var profilePhotoManager: ProfilePhotoManager
     
+    @ObservedObject var editProfileViewModel = EditProfileViewModel()
+    
+    @State var selectedItem: PhotosPickerItem?
+    @State private var selectedPhotoData: Data?
     
     var body: some View {
         
@@ -47,22 +44,25 @@ struct EditProfileView: View {
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 40, trailing: 0))
                     
                     HStack(spacing: 0) {
+                        
                         Image("appLogoController")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 23)
                             .padding(.trailing, 10.0)
+                        
                         Image("appLogo")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 170, height: 23)
+                        
                     }
                     .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 35))
                     .frame(maxWidth: .infinity)
                     .alignmentGuide(.leading) { d in d[HorizontalAlignment.center] }
                 }
                 
-                if successfulUpdateDataView {
+                if editProfileViewModel.successfulUpdateDataView {
                     
                     VStack(spacing: 0) {
                         
@@ -86,6 +86,11 @@ struct EditProfileView: View {
                         Button {
                             
                             dismiss()
+                            
+                            editProfileViewModel.successfulUpdateDataView = false
+                            editProfileViewModel.email = ""
+                            editProfileViewModel.password = ""
+                            editProfileViewModel.userName = ""
                             
                         } label: {
                             
@@ -112,26 +117,29 @@ struct EditProfileView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .font(.title3)
                         .padding(.bottom, 40)
-                    
-
                         
                     ZStack {
                         
                         if let selectedPhotoData = selectedPhotoData,
                                         let image = UIImage(data: selectedPhotoData) {
+                            
                                         Image(uiImage: image)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 80, height: 80)
                                             .clipShape(Circle())
+                            
                                     } else if let savedProfilePhotoData = profilePhotoManager.photoData,
                                         let savedProfilePhoto = UIImage(data: savedProfilePhotoData) {
+                                        
                                         Image(uiImage: savedProfilePhoto)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 80, height: 80)
                                             .clipShape(Circle())
+                                        
                                     } else {
+                                        
                                         Image("exampleProfilePhoto")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
@@ -170,7 +178,7 @@ struct EditProfileView: View {
                         
                         VStack(spacing: 0) {
                             
-                            ModuleEdit(successfulUpdateDataView: $successfulUpdateDataView, selectedPhotoData: $selectedPhotoData)
+                            ModuleEdit(selectedPhotoData: $selectedPhotoData, email: $editProfileViewModel.email, password: $editProfileViewModel.password, userName: $editProfileViewModel.userName, editProfileViewModel: editProfileViewModel)
                             
                         }
                         .padding(.horizontal, 20)
@@ -193,19 +201,15 @@ struct EditProfileView: View {
 
 struct ModuleEdit: View {
     
-    @Binding var successfulUpdateDataView: Bool
-    
-    @State private var activeAlert: EditProfileAlert?
-    
-    @Binding var selectedPhotoData: Data?
-    
     @EnvironmentObject var profilePhotoManager: ProfilePhotoManager
     
-    @State var email = ""
+    @Binding var selectedPhotoData: Data?
+    @Binding var email: String
+    @Binding var password: String
+    @Binding var userName: String
     
-    @State var password = ""
+    var editProfileViewModel: EditProfileViewModel
     
-    @State var userName = ""
     
     var body: some View {
         
@@ -287,7 +291,7 @@ struct ModuleEdit: View {
         
         Button{
             
-            updateData(successfulUpdateDataView: $successfulUpdateDataView, email: email, password: password, userName: userName, activeAlert: $activeAlert, selectedPhotoData: selectedPhotoData, profilePhotoManager: profilePhotoManager)
+            editProfileViewModel.updateData(email: email, password: password, userName: userName, selectedPhotoData: selectedPhotoData, profilePhotoManager: profilePhotoManager)
             
         } label: {
             
@@ -298,14 +302,23 @@ struct ModuleEdit: View {
                 .font(.title2)
                 .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
                 .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("dark-cian"), lineWidth: 1.0).shadow(color: Color("dark-cian"), radius: 5))
-                .alert(item: $activeAlert) { alertType in
+                .alert(item: Binding(
+                    
+                    get: { self.editProfileViewModel.activeAlert },
+                    set: { self.editProfileViewModel.activeAlert = $0 }
+                    
+                )) { alertType in
                     switch alertType {
+                        
                     case .incorrectEmailFormat:
                         return Alert(title: Text("Error"), message: Text("El formato del email no es correcto."), dismissButton: .default(Text("Entendido")))
+                        
                     case .incorrectPasswordFormat:
                         return Alert(title: Text("Error"), message: Text("El formato de la contraseña no es correcto. La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número."), dismissButton: .default(Text("Entendido")))
+                        
                     case .credentialsSameAsCurrent:
                         return Alert(title: Text("Error"), message: Text("Las credenciales no pueden ser las mismas que las actuales."), dismissButton: .default(Text("Entendido")))
+                        
                     case .emptyUserName:
                         return Alert(title: Text("Error"), message: Text("El nombre de usuario no puede estar vacío."), dismissButton: .default(Text("Entendido")))
                     }
@@ -314,65 +327,6 @@ struct ModuleEdit: View {
         
         
     }
-}
-
-enum EditProfileAlert: Identifiable {
-    case incorrectEmailFormat
-    case incorrectPasswordFormat
-    case credentialsSameAsCurrent
-    case emptyUserName
-    
-    var id: Int {
-        switch self {
-        case .incorrectEmailFormat:
-            return 1
-        case .incorrectPasswordFormat:
-            return 2
-        case .credentialsSameAsCurrent:
-            return 3
-        case .emptyUserName:
-            return 4
-        }
-    }
-}
-
-func updateData(successfulUpdateDataView: Binding<Bool>, email: String, password: String, userName: String, activeAlert: Binding<EditProfileAlert?>, selectedPhotoData: Data?, profilePhotoManager: ProfilePhotoManager) {
-    
-    guard isValidEmail(email) else {
-        
-        activeAlert.wrappedValue = .incorrectEmailFormat
-        return
-    }
-    
-    guard isValidPassword(password) else {
-        
-        activeAlert.wrappedValue = .incorrectPasswordFormat
-        return
-    }
-    
-    guard !SecurityDataManager.validate(email: email, password: password) else {
-        
-        activeAlert.wrappedValue = .credentialsSameAsCurrent
-        return
-    }
-    
-    guard !userName.isEmpty else {
-        activeAlert.wrappedValue = .emptyUserName
-        return
-    }
-    
-    
-    
-    if let data = selectedPhotoData {
-            profilePhotoManager.saveProfilePhoto(data)
-        } else {
-            profilePhotoManager.deleteProfilePhoto()
-        }
-    
-    SecurityDataManager.saveData(email: email, password: password, userName: userName)
-    
-    successfulUpdateDataView.wrappedValue = true
-    
 }
 
 

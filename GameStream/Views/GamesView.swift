@@ -9,26 +9,17 @@ import SwiftUI
 
 struct GamesView: View {
     
-    @ObservedObject var allGames = ViewModel()
+    @ObservedObject var allGames = GamesViewModel()
     
-    @State var gameViewIsActive: Bool = false
-    
+    @State var gameViewIsActive: Bool = false    
     @State var url: String = ""
-    
     @State var title: String = ""
-    
     @State var studio: String = ""
-    
     @State var contentRaiting: String = ""
-    
     @State var publicationYear: String = ""
-    
     @State var description: String = ""
-    
     @State var platforms: [String] = [""]
-    
     @State var tags: [String] = [""]
-    
     @State var galleryImages: [String] = [""]
     
     let gridForm = [
@@ -48,15 +39,18 @@ struct GamesView: View {
             VStack(spacing: 0) {
                 
                 HStack(spacing: 0.0) {
+                    
                     Image("appLogoController")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 23)
                         .padding(.trailing, 10.0)
+                    
                     Image("appLogo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                     .frame(width: 170)
+                    
                 }
                 .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0))
                 
@@ -129,7 +123,9 @@ struct GamesView: View {
             .padding(.horizontal, 20)
             
             NavigationLink(destination: GameView(url: url, title: title, studio: studio, contentRaiting: contentRaiting, publicationYear: publicationYear, description: description, platforms: platforms, tags: tags, galleryImages: galleryImages), isActive: $gameViewIsActive) {
+                
                 EmptyView()
+                
             }
             
         }
@@ -137,16 +133,11 @@ struct GamesView: View {
     }
 }
 
-extension String {
-    func truncate(_ length: Int) -> String {
-        guard self.count > length else { return self }
-        return prefix(length) + "..."
-    }
-}
-
-
 struct GamesView_Previews: PreviewProvider {
+    
     static var previews: some View {
+        
         GamesView()
+        
     }
 }

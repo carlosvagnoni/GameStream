@@ -48,11 +48,13 @@ struct SplashScreenView: View {
                 .ignoresSafeArea()
             
             HStack(spacing: 0.0) {
+                
                 Image("appLogoController")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 23)
                     .padding(.trailing, 10.0)
+                
                 Image("appLogo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

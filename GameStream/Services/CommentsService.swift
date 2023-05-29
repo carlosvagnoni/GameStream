@@ -21,7 +21,7 @@ struct CommentsTableData: Hashable {
     
 }
 
-class CommentsData: NSObject {
+class CommentsService: NSObject {
     
     static let data = [
     
@@ -50,7 +50,7 @@ class CommentsData: NSObject {
         CommentsTableData(gameTitle: "DEATH STRANDING", author: "Endrina Hernández", authorProfilePhoto: "endrina", commentDate: "19/08/2021", comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet, ex vel sodales posuere, purus purus sodales libero, ut tempus ex leo id erat. Vivamus id ligula orci. Etiam elit leo, pretium dictum lobortis ac, pulvinar sit amet lacus. Vestibulum."),
         
         CommentsTableData(gameTitle: "Halo: The Master Chief Collection", author: "Laura Goméz", authorProfilePhoto: "laura", commentDate: "15/06/2021", comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet, ex vel sodales posuere, purus purus sodales libero, ut tempus ex leo id erat. Vivamus id ligula orci. Etiam elit leo, pretium dictum lobortis ac, pulvinar sit amet lacus. Vestibulum."),
-        CommentsTableData(gameTitle: "Halo: The Master Chief Collection", author: "Carlos Vagnoni", authorProfilePhoto: "carlos", commentDate: "15/06/2021", comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet, ex vel sodales posuere, purus purus sodales libero, ut tempus ex leo id erat. Vivamus id ligula orci. Etiam elit leo, pretium dictum lobortis ac, pulvinar sit amet lacus. Vestibulum."),
+        CommentsTableData(gameTitle: "Halo: The Master Chief Collection", author: "Carlos Vagnoni", authorProfilePhoto: "carlos", commentDate: "15/06/2021", comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet, ex vel sodales posuere, purus purus sodales libero, ut tempus ex leo id erat. Vivamus id ligula orci. Etiam elit leo, pretium dictum lobortis ac, pulvinar sit amet lacus. Vestibulum.")
     
     ]
     

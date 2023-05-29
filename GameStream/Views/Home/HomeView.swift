@@ -1,44 +1,76 @@
 //
-//  SubModuleHome.swift
+//  HomeView.swift
 //  GameStream
 //
-//  Created by user239477 on 5/13/23.
+//  Created by user239477 on 5/11/23.
 //
 
 import SwiftUI
-import AVKit
+
+struct HomeView: View {
+    
+    var body: some View {
+        
+        ZStack {
+            
+            Color("marine")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                
+                HStack(spacing: 0.0) {
+                    Image("appLogoController")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 23)
+                        .padding(.trailing, 10.0)
+                    Image("appLogo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 170)
+                }
+                .padding(EdgeInsets(top: 10, leading: 0, bottom: 35, trailing: 0))
+                
+                
+                VStack {
+                    
+                    ScrollView(showsIndicators: false) {
+                        
+                        SubModuleHome()
+                        
+                    }
+                    
+                    
+                }
+                .padding(.horizontal, 20)
+                
+                
+                
+            }
+            
+            
+        }
+        
+    }
+}
 
 struct SubModuleHome: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @ObservedObject var allGames = GamesViewModel()
+    @ObservedObject var homeViewModel = HomeViewModel()
+    
     @State var searchText = ""
-    
-    @ObservedObject var allGames = ViewModel()
-    
-    @ObservedObject var foundGame = SearchGame()
-    
-    @State var isGameViewActive = false
-    
     @State var url: String = ""
-    
     @State var title: String = ""
-    
     @State var studio: String = ""
-    
     @State var contentRaiting: String = ""
-    
     @State var publicationYear: String = ""
-    
     @State var description: String = ""
-    
     @State var platforms: [String] = [""]
-    
     @State var tags: [String] = [""]
-    
     @State var galleryImages: [String] = [""]
-    
-    @State private var activeAlert: GameAlert?
     
     var body: some View {
         
@@ -51,11 +83,11 @@ struct SubModuleHome: View {
                     
                     if searchText.isEmpty {
                         
-                        activeAlert = .searchTextEmpty
+                        homeViewModel.activeAlert = .searchTextEmpty
                         
                     } else {
                         
-                        watchGame(name: searchText)
+                        homeViewModel.watchGame(name: searchText, url: $url, title: $title, studio: $studio, contentRaiting: $contentRaiting, publicationYear: $publicationYear, description: $description, platforms: $platforms, tags: $tags, galleryImages: $galleryImages)
                         
                     }
                     
@@ -66,10 +98,12 @@ struct SubModuleHome: View {
                         .foregroundColor(searchText.isEmpty ? Color(.white) : Color("dark-cian"))
                     
                 }
-                .alert(item: $activeAlert) { alertType in
+                .alert(item: $homeViewModel.activeAlert) { alertType in
                     switch alertType {
+                        
                     case .gameNotFound:
                         return Alert(title: Text("Error"), message: Text("No se encontró el juego"), dismissButton: .default(Text("Entendido")))
+                        
                     case .searchTextEmpty:
                         return Alert(title: Text("Error"), message: Text("El campo de búsqueda no puede estar vacío"), dismissButton: .default(Text("Entendido")))
                     }
@@ -104,7 +138,7 @@ struct SubModuleHome: View {
                     
                     Button {
                         
-                        watchGame(name: "The Witcher 3")
+                        homeViewModel.watchGame(name: "The Witcher 3", url: $url, title: $title, studio: $studio, contentRaiting: $contentRaiting, publicationYear: $publicationYear, description: $description, platforms: $platforms, tags: $tags, galleryImages: $galleryImages)
                         
                     } label: {
                         
@@ -283,7 +317,7 @@ struct SubModuleHome: View {
                             
                             Button {
                                 
-                                watchGame(name: "Abzu")
+                                homeViewModel.watchGame(name: "Abzu", url: $url, title: $title, studio: $studio, contentRaiting: $contentRaiting, publicationYear: $publicationYear, description: $description, platforms: $platforms, tags: $tags, galleryImages: $galleryImages)
                                 
                             } label: {
                                 
@@ -296,7 +330,7 @@ struct SubModuleHome: View {
                             
                             Button {
                                 
-                                watchGame(name: "Crash Bandicoot")
+                                homeViewModel.watchGame(name: "Crash Bandicoot", url: $url, title: $title, studio: $studio, contentRaiting: $contentRaiting, publicationYear: $publicationYear, description: $description, platforms: $platforms, tags: $tags, galleryImages: $galleryImages)
                                 
                             } label: {
                                 
@@ -309,7 +343,7 @@ struct SubModuleHome: View {
                             
                             Button {
                                 
-                                watchGame(name: "DEATH STRANDING")
+                                homeViewModel.watchGame(name: "DEATH STRANDING", url: $url, title: $title, studio: $studio, contentRaiting: $contentRaiting, publicationYear: $publicationYear, description: $description, platforms: $platforms, tags: $tags, galleryImages: $galleryImages)
                                 
                             } label: {
                                 
@@ -322,7 +356,7 @@ struct SubModuleHome: View {
                             
                             Button {
                                 
-                                watchGame(name: "Cuphead")
+                                homeViewModel.watchGame(name: "Cuphead", url: $url, title: $title, studio: $studio, contentRaiting: $contentRaiting, publicationYear: $publicationYear, description: $description, platforms: $platforms, tags: $tags, galleryImages: $galleryImages)
                                 
                             } label: {
                                 
@@ -335,7 +369,7 @@ struct SubModuleHome: View {
                             
                             Button {
                                 
-                                watchGame(name: "Hades")
+                                homeViewModel.watchGame(name: "Hades", url: $url, title: $title, studio: $studio, contentRaiting: $contentRaiting, publicationYear: $publicationYear, description: $description, platforms: $platforms, tags: $tags, galleryImages: $galleryImages)
                                 
                             } label: {
                                 
@@ -348,7 +382,7 @@ struct SubModuleHome: View {
                             
                             Button {
                                 
-                                watchGame(name: "Grand Theft Auto V")
+                                homeViewModel.watchGame(name: "Grand Theft Auto V", url: $url, title: $title, studio: $studio, contentRaiting: $contentRaiting, publicationYear: $publicationYear, description: $description, platforms: $platforms, tags: $tags, galleryImages: $galleryImages)
                                 
                             } label: {
                                 
@@ -510,7 +544,7 @@ struct SubModuleHome: View {
                                     tags = game.tags
                                     galleryImages = game.galleryImages
                                     
-                                    isGameViewActive = true
+                                    homeViewModel.isGameViewActive = true
                                     
                                 } label: {
                                     
@@ -523,7 +557,7 @@ struct SubModuleHome: View {
                                                 .font(.subheadline)
                                                 .foregroundColor(.white)
                                             
-                                            Spacer()         
+                                            Spacer()
                                             
                                             Image(systemName: "magnifyingglass")
                                                 .foregroundColor(Color("dark-cian"))
@@ -557,65 +591,9 @@ struct SubModuleHome: View {
         }
         
         
-        NavigationLink(destination: GameView(url: url, title: title, studio: studio, contentRaiting: contentRaiting, publicationYear: publicationYear, description: description, platforms: platforms, tags: tags, galleryImages: galleryImages), isActive: $isGameViewActive) {
+        NavigationLink(destination: GameView(url: url, title: title, studio: studio, contentRaiting: contentRaiting, publicationYear: publicationYear, description: description, platforms: platforms, tags: tags, galleryImages: galleryImages), isActive: $homeViewModel.isGameViewActive) {
+            
             EmptyView()
-        }
-        
-    }
-    
-    enum GameAlert: Identifiable {
-        case gameNotFound
-        case searchTextEmpty
-
-        var id: Int {
-            switch self {
-            case .gameNotFound:
-                return 1
-            case .searchTextEmpty:
-                return 2
-            }
-        }
-    }
-    
-    func watchGame(name: String) {
-        
-        foundGame.search(gameName: name) { finished in
-            
-            if finished {
-                
-                DispatchQueue.main.async {
-                                        
-                    if foundGame.gameInfo.count == 0 {
-                        
-                        activeAlert = .gameNotFound
-                        
-                    } else {
-                        
-                        url = foundGame.gameInfo[0].videosUrls.mobile
-                        title = foundGame.gameInfo[0].title
-                        studio = foundGame.gameInfo[0].studio
-                        contentRaiting = foundGame.gameInfo[0].contentRaiting
-                        publicationYear = foundGame.gameInfo[0].publicationYear
-                        description = foundGame.gameInfo[0].description
-                        platforms = foundGame.gameInfo[0].platforms
-                        tags = foundGame.gameInfo[0].tags
-                        galleryImages = foundGame.gameInfo[0].galleryImages
-                        
-                        isGameViewActive = true
-                        
-                    }
-                    
-                }
-                
-            } else {
-                
-                DispatchQueue.main.async {
-                    
-                    activeAlert = .gameNotFound
-                    
-                }
-            }
-            
         }
         
     }
@@ -623,21 +601,10 @@ struct SubModuleHome: View {
     
 }
 
-
-
-struct SubModuleHome_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        ZStack {
-            
-            Spacer()
-            
-            Color("marine")
-                .ignoresSafeArea()
-            
-            SubModuleHome(url: "ejemplo", title: "Crash Bandicoot™ N. Sane Trilogy", studio: "Sega", contentRaiting: "E+", publicationYear: "1991", description: "Juego de Sega Genesis publicado en 1991 con más de 40 millones de copias vendidas actualmente", platforms:  ["PC", "Playstation 4"], tags: ["plataformas","mascota"], galleryImages: [ "https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_fad459eb04408dd926de3b789c8bc6d13bf855c0.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_931f13ad19753ac5d491bc55e31ec9e2181ca637.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_c2439741a40a81e4772412b4a92866aa1f188f2f.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_1a5bd0956c774afcadb1474f5fed2085715f2987.600x338.jpg","https://cdn.cloudflare.steamstatic.com/steam/apps/731490/ss_bf301672eede469605ef823057cba1eb3b845f12.600x338.jpg"])
-            
-        }
+        HomeView()
     }
 }

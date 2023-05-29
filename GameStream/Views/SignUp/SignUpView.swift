@@ -10,27 +10,21 @@ import PhotosUI
 
 struct SignUpView: View {
     
-    @State var selectedItem: PhotosPickerItem?
-    
-    @State private var selectedPhotoData: Data?
+    @EnvironmentObject var profilePhotoManager: ProfilePhotoManager
+    @ObservedObject var signUpViewModel = SignUpViewModel()
     
     @Binding var loginType: Bool
     
+    @State var selectedItem: PhotosPickerItem?
     @State var email = ""
-    
     @State var password = ""
-    
     @State var confirmedPassword = ""
     
-    @State var successfulSignUpView = false
-    
-    @State private var activeAlert: SignUpAlert?
-    
-    @EnvironmentObject var profilePhotoManager: ProfilePhotoManager
+    @State private var selectedPhotoData: Data?
     
     var body: some View {
         
-        if successfulSignUpView {
+        if signUpViewModel.successfulSignUpView {
             
             ScrollView {
                 
@@ -56,6 +50,10 @@ struct SignUpView: View {
                     Button {
                         
                         loginType = true
+                        signUpViewModel.successfulSignUpView = false
+                        email = ""
+                        password = ""
+                        confirmedPassword = ""
                         
                     } label: {
                         
@@ -67,7 +65,7 @@ struct SignUpView: View {
                             .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
                             .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("dark-cian"), lineWidth: 1.0).shadow(color: Color("dark-cian"), radius: 5))
                     }
-                        
+                    
                     
                 }
                 .padding(.horizontal, 20)
@@ -99,17 +97,21 @@ struct SignUpView: View {
                             
                             if let selectedPhotoData = selectedPhotoData,
                                let image = UIImage(data: selectedPhotoData) {
+                                
                                 Image(uiImage: image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 80, height: 80)
                                     .clipShape(Circle())
+                                
                             } else {
+                                
                                 Image("exampleProfilePhoto")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 80, height: 80)
                                     .clipShape(Circle())
+                                
                             }
                             
                             
@@ -129,7 +131,7 @@ struct SignUpView: View {
                                                  if let data = try? await newItem?.loadTransferable(type: Data.self) {
                                                      
                                                      selectedPhotoData = data
-
+                                                     
                                                  }
                                              }
                                          }
@@ -170,7 +172,7 @@ struct SignUpView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                             .font(/*@START_MENU_TOKEN@*/.title3/*@END_MENU_TOKEN@*/)
-                        .padding(.bottom)
+                            .padding(.bottom)
                         
                         CustomSecureField(password: $password)
                         
@@ -196,7 +198,9 @@ struct SignUpView: View {
                     Spacer(minLength: 40)
                     
                     Button {
-                        signUp(successfulSignUpView: $successfulSignUpView, email: email, password: password, confirmedPassword: confirmedPassword, activeAlert: $activeAlert, selectedPhotoData: selectedPhotoData, profilePhotoManager: profilePhotoManager)
+                        
+                        signUpViewModel.signUp(email: email, password: password, confirmedPassword: confirmedPassword, selectedPhotoData: selectedPhotoData, profilePhotoManager: profilePhotoManager)
+                        
                     } label: {
                         
                         Text("REGÍSTRATE")
@@ -206,14 +210,18 @@ struct SignUpView: View {
                             .font(.title2)
                             .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
                             .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("dark-cian"), lineWidth: 1.0).shadow(color: Color("dark-cian"), radius: 5))
+                        
                     }
                     .padding(.bottom, 60)
-                    .alert(item: $activeAlert) { alertType in
+                    .alert(item: $signUpViewModel.activeAlert) { alertType in
                         switch alertType {
+                            
                         case .incorrectEmailFormat:
                             return Alert(title: Text("Error"), message: Text("El formato del email no es correcto."), dismissButton: .default(Text("Entendido")))
+                            
                         case .incorrectPasswordFormat:
                             return Alert(title: Text("Error"), message: Text("El formato de la contraseña no es correcto. La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número."), dismissButton: .default(Text("Entendido")))
+                            
                         case .passwordsDoNotMatch:
                             return Alert(title: Text("Error"), message: Text("Las contraseñas deben coincidir."), dismissButton: .default(Text("Entendido")))
                         }
@@ -225,11 +233,12 @@ struct SignUpView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .foregroundColor(.white)
                             .font(.headline)
-                        .padding(.bottom, 20)
+                            .padding(.bottom, 20)
                         
                         HStack {
                             
-                            Button(action: facebookSignUp) {
+                            Button(action: signUpViewModel.facebookSignUp) {
+                                
                                 Text("Facebook")
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
@@ -238,9 +247,11 @@ struct SignUpView: View {
                                     .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
                                     .background(Color("blue-gray"))
                                     .cornerRadius(6.0)
+                                
                             }
                             
-                            Button(action: twitterSignUp) {
+                            Button(action: signUpViewModel.twitterSignUp) {
+                                
                                 Text("Twitter")
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
@@ -249,6 +260,7 @@ struct SignUpView: View {
                                     .padding(EdgeInsets(top: 11, leading: 18, bottom: 11, trailing: 18))
                                     .background(Color("blue-gray"))
                                     .cornerRadius(6.0)
+                                
                             }
                             
                         }
@@ -263,80 +275,6 @@ struct SignUpView: View {
         
         
     }
-}
-
-enum SignUpAlert: Identifiable {
-    case incorrectEmailFormat
-    case incorrectPasswordFormat
-    case passwordsDoNotMatch
-    
-    var id: Int {
-        switch self {
-        case .incorrectEmailFormat:
-            return 1
-        case .incorrectPasswordFormat:
-            return 2
-        case .passwordsDoNotMatch:
-            return 3
-        }
-    }
-}
-
-func takePhoto() {
-    print("Tomar foto")
-}
-
-func signUp(successfulSignUpView: Binding<Bool>, email: String, password: String, confirmedPassword: String, activeAlert: Binding<SignUpAlert?>, selectedPhotoData: Data?, profilePhotoManager: ProfilePhotoManager) {
-    
-    guard isValidEmail(email) else {
-        
-        activeAlert.wrappedValue = .incorrectEmailFormat
-        return
-    }
-    
-    guard isValidPassword(password) else {
-        
-        activeAlert.wrappedValue = .incorrectPasswordFormat
-        return
-    }
-    
-    guard password == confirmedPassword else {
-        
-        activeAlert.wrappedValue = .passwordsDoNotMatch
-        return
-    }
-    
-    if let data = selectedPhotoData {
-            profilePhotoManager.saveProfilePhoto(data)
-        } else {
-            profilePhotoManager.deleteProfilePhoto()
-        }
-    
-    SecurityDataManager.saveData(email: email, password: password, userName: email)
-    
-    successfulSignUpView.wrappedValue = true
-    
-    
-}
-
-func isValidEmail(_ email: String) -> Bool {
-    let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-    return emailPredicate.evaluate(with: email)
-}
-
-func isValidPassword(_ password: String) -> Bool {
-    let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
-    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-    return passwordPredicate.evaluate(with: password)
-}
-
-func facebookSignUp() {
-    print("Estoy registrandome con facebook")
-}
-
-func twitterSignUp() {
-    print("Estoy registrandome con twitter")
 }
 
 struct SignUpView_Previews: PreviewProvider {

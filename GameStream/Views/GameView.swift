@@ -17,21 +17,13 @@ struct GameView: View {
     @State private var favorite: Bool = false
     
     var url: String
-    
     var title: String
-    
     var studio: String
-    
     var contentRaiting: String
-    
     var publicationYear: String
-    
     var description: String
-    
     var platforms: [String]
-    
     var tags: [String]
-    
     var galleryImages: [String]
     
     var body: some View {
@@ -124,17 +116,11 @@ struct VideoInfo: View {
     @Binding var favorite: Bool
     
     var title: String
-    
     var studio: String
-    
     var contentRaiting: String
-    
     var publicationYear: String
-    
     var description: String
-    
     var platforms: [String]
-    
     var tags: [String]
     
     var body: some View {
@@ -328,7 +314,7 @@ struct Comments: View {
     let gameTitleFilter: String
     
     var filteredData: [CommentsTableData] {
-            CommentsData.filterByGameTitle(gameTitleFilter: gameTitleFilter)
+            CommentsService.filterByGameTitle(gameTitleFilter: gameTitleFilter)
         }
     
     var body: some View {

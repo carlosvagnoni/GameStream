@@ -12,7 +12,7 @@ struct FavoritesView: View {
     
     @EnvironmentObject var favoritesManager: FavoritesManager
     
-    @ObservedObject var allGames = ViewModel()
+    @ObservedObject var allGames = GamesViewModel()
     
     var body: some View {
         
@@ -55,8 +55,10 @@ struct FavoritesView: View {
                     ForEach(allGames.gamesInfo.filter({ favoritesManager.favorites.contains($0.title) }), id: \.self) { game in
                         
                         GameRow(
+                            
                             playerViewModel: VideoPlayerViewModel(url: URL(string: game.videosUrls.mobile)!),
                             game: game
+                            
                         )
                         
                     }
@@ -74,11 +76,11 @@ struct FavoritesView: View {
 
 struct GameRow: View {
     
+    @EnvironmentObject var favoritesManager: FavoritesManager
+    
     @StateObject var playerViewModel: VideoPlayerViewModel
     
     @State private var isRemoveFavoriteButtonActive = false
-    
-    @EnvironmentObject var favoritesManager: FavoritesManager
     
     let game: Game
 

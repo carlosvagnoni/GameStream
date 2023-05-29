@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ViewModel: ObservableObject {
+class GamesViewModel: ObservableObject {
     
     @Published var gamesInfo = [Game]()
     

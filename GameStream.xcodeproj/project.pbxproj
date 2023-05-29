@@ -7,58 +7,72 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD243F172A11BBF200AA398B /* CommentsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD243F162A11BBF200AA398B /* CommentsDataModel.swift */; };
+		DD243F172A11BBF200AA398B /* CommentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD243F162A11BBF200AA398B /* CommentsService.swift */; };
 		DD26DECD2A196F4400792BF5 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26DECC2A196F4400792BF5 /* EditProfileView.swift */; };
 		DD30CC1C2A2213C8001606E0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD30CC1B2A2213C8001606E0 /* MainView.swift */; };
 		DD3AF48D2A1EAF0200CBCFC8 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */; };
 		DD6BA8F52A0CFA3B00DB5E88 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */; };
 		DD78ADCB2A212A1A008E7DF0 /* ProfilePhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78ADCA2A212A1A008E7DF0 /* ProfilePhotoManager.swift */; };
 		DD79A9512A1863BF00A5D8D0 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79A9502A1863BF00A5D8D0 /* FavoritesView.swift */; };
+		DD7C3EC52A23C06800D47753 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7C3EC42A23C06800D47753 /* ValidationService.swift */; };
+		DD7C3EC72A23C24C00D47753 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7C3EC62A23C24C00D47753 /* StringExtensions.swift */; };
+		DD7C3EC92A23C51600D47753 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7C3EC82A23C51600D47753 /* HomeViewModel.swift */; };
+		DD7C3ECB2A23D81400D47753 /* EditprofileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7C3ECA2A23D81400D47753 /* EditprofileViewModel.swift */; };
 		DD8FE3E22A1FDAE80050CE97 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8FE3E12A1FDAE80050CE97 /* VideoPlayerViewModel.swift */; };
 		DD9683062A0B09670005FC21 /* GameStreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9683052A0B09670005FC21 /* GameStreamApp.swift */; };
 		DD9683082A0B09670005FC21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9683072A0B09670005FC21 /* ContentView.swift */; };
 		DD96830A2A0B09670005FC21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD9683092A0B09670005FC21 /* Assets.xcassets */; };
 		DD96830D2A0B09670005FC21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD96830C2A0B09670005FC21 /* Preview Assets.xcassets */; };
+		DDA013112A238D0A00875D91 /* LoginAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA013102A238D0A00875D91 /* LoginAlert.swift */; };
+		DDA013142A238D8800875D91 /* SignUpAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA013132A238D8800875D91 /* SignUpAlert.swift */; };
+		DDA013172A238E7D00875D91 /* GameAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA013162A238E7D00875D91 /* GameAlert.swift */; };
+		DDA0131A2A238EE900875D91 /* EditProfileAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA013192A238EE900875D91 /* EditProfileAlert.swift */; };
+		DDA0131C2A2399F200875D91 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA0131B2A2399F200875D91 /* LoginViewModel.swift */; };
+		DDA0131E2A23A05400875D91 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA0131D2A23A05400875D91 /* SignUpViewModel.swift */; };
 		DDA21BA02A18F2B5007DE61C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA21B9F2A18F2B5007DE61C /* ProfileView.swift */; };
 		DDB1AD642A10877000F442AC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB1AD632A10877000F442AC /* GameView.swift */; };
-		DDBD1C6A2A0F995F002E849B /* LoginAndSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C692A0F995F002E849B /* LoginAndSignUpView.swift */; };
 		DDBD1C6C2A0F9A3B002E849B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C6B2A0F9A3B002E849B /* LoginView.swift */; };
 		DDBD1C6E2A0F9B58002E849B /* CustomSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C6D2A0F9B58002E849B /* CustomSecureField.swift */; };
 		DDBD1C702A0F9C1F002E849B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C6F2A0F9C1F002E849B /* SignUpView.swift */; };
 		DDBD1C722A0F9E84002E849B /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C712A0F9E84002E849B /* HomeTabView.swift */; };
-		DDBD1C742A0FA050002E849B /* SubModuleHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1C732A0FA050002E849B /* SubModuleHome.swift */; };
-		DDEE83102A13920A005FF3D6 /* SearchGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEE830F2A13920A005FF3D6 /* SearchGame.swift */; };
-		DDEFB6132A0F3989003845A1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6122A0F3989003845A1 /* Model.swift */; };
-		DDEFB6152A0F39B5003845A1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6142A0F39B5003845A1 /* ViewModel.swift */; };
+		DDEFB6132A0F3989003845A1 /* GamesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6122A0F3989003845A1 /* GamesModel.swift */; };
+		DDEFB6152A0F39B5003845A1 /* GamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6142A0F39B5003845A1 /* GamesViewModel.swift */; };
 		DDEFB6172A0F39EF003845A1 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEFB6162A0F39EF003845A1 /* GamesView.swift */; };
 		DDF10B2C2A1A5A0700E0B6B4 /* SecurityDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DD243F162A11BBF200AA398B /* CommentsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsDataModel.swift; sourceTree = "<group>"; };
+		DD243F162A11BBF200AA398B /* CommentsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsService.swift; sourceTree = "<group>"; };
 		DD26DECC2A196F4400792BF5 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		DD30CC1B2A2213C8001606E0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DD78ADCA2A212A1A008E7DF0 /* ProfilePhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoManager.swift; sourceTree = "<group>"; };
 		DD79A9502A1863BF00A5D8D0 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		DD7C3EC42A23C06800D47753 /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		DD7C3EC62A23C24C00D47753 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		DD7C3EC82A23C51600D47753 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		DD7C3ECA2A23D81400D47753 /* EditprofileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditprofileViewModel.swift; sourceTree = "<group>"; };
 		DD8FE3E12A1FDAE80050CE97 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
 		DD9683022A0B09670005FC21 /* GameStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD9683052A0B09670005FC21 /* GameStreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStreamApp.swift; sourceTree = "<group>"; };
 		DD9683072A0B09670005FC21 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DD9683092A0B09670005FC21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD96830C2A0B09670005FC21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DDA013102A238D0A00875D91 /* LoginAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlert.swift; sourceTree = "<group>"; };
+		DDA013132A238D8800875D91 /* SignUpAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAlert.swift; sourceTree = "<group>"; };
+		DDA013162A238E7D00875D91 /* GameAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAlert.swift; sourceTree = "<group>"; };
+		DDA013192A238EE900875D91 /* EditProfileAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileAlert.swift; sourceTree = "<group>"; };
+		DDA0131B2A2399F200875D91 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		DDA0131D2A23A05400875D91 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		DDA21B9F2A18F2B5007DE61C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DDB1AD632A10877000F442AC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		DDBD1C692A0F995F002E849B /* LoginAndSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndSignUpView.swift; sourceTree = "<group>"; };
 		DDBD1C6B2A0F9A3B002E849B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DDBD1C6D2A0F9B58002E849B /* CustomSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureField.swift; sourceTree = "<group>"; };
 		DDBD1C6F2A0F9C1F002E849B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		DDBD1C712A0F9E84002E849B /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
-		DDBD1C732A0FA050002E849B /* SubModuleHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubModuleHome.swift; sourceTree = "<group>"; };
-		DDEE830F2A13920A005FF3D6 /* SearchGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGame.swift; sourceTree = "<group>"; };
-		DDEFB6122A0F3989003845A1 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		DDEFB6142A0F39B5003845A1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		DDEFB6122A0F3989003845A1 /* GamesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModel.swift; sourceTree = "<group>"; };
+		DDEFB6142A0F39B5003845A1 /* GamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewModel.swift; sourceTree = "<group>"; };
 		DDEFB6162A0F39EF003845A1 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
 		DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +88,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD7C3EC32A23C04300D47753 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DD7C3EC42A23C06800D47753 /* ValidationService.swift */,
+				DD7C3EC62A23C24C00D47753 /* StringExtensions.swift */,
+				DD243F162A11BBF200AA398B /* CommentsService.swift */,
+				DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */,
+				DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		DD9682F92A0B09670005FC21 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +119,7 @@
 		DD9683042A0B09670005FC21 /* GameStream */ = {
 			isa = PBXGroup;
 			children = (
+				DD7C3EC32A23C04300D47753 /* Services */,
 				DDEFB6112A0F3956003845A1 /* ViewsModels */,
 				DDEFB6102A0F38FB003845A1 /* Models */,
 				DDEFB60F2A0F38B2003845A1 /* Views */,
@@ -111,23 +138,65 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		DDA0130E2A2383D300875D91 /* CustomComponents */ = {
+			isa = PBXGroup;
+			children = (
+				DDBD1C6D2A0F9B58002E849B /* CustomSecureField.swift */,
+			);
+			path = CustomComponents;
+			sourceTree = "<group>";
+		};
+		DDA0130F2A238CCC00875D91 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DDBD1C6B2A0F9A3B002E849B /* LoginView.swift */,
+				DDA013102A238D0A00875D91 /* LoginAlert.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		DDA013122A238D4700875D91 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				DDBD1C6F2A0F9C1F002E849B /* SignUpView.swift */,
+				DDA013132A238D8800875D91 /* SignUpAlert.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		DDA013152A238E1100875D91 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */,
+				DDA013162A238E7D00875D91 /* GameAlert.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		DDA013182A238ECD00875D91 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				DD26DECC2A196F4400792BF5 /* EditProfileView.swift */,
+				DDA013192A238EE900875D91 /* EditProfileAlert.swift */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
 		DDEFB60F2A0F38B2003845A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DDA0130E2A2383D300875D91 /* CustomComponents */,
 				DD9683072A0B09670005FC21 /* ContentView.swift */,
 				DD30CC1B2A2213C8001606E0 /* MainView.swift */,
-				DDBD1C692A0F995F002E849B /* LoginAndSignUpView.swift */,
-				DDBD1C6B2A0F9A3B002E849B /* LoginView.swift */,
-				DDBD1C6D2A0F9B58002E849B /* CustomSecureField.swift */,
-				DDBD1C6F2A0F9C1F002E849B /* SignUpView.swift */,
+				DDA0130F2A238CCC00875D91 /* Login */,
+				DDA013122A238D4700875D91 /* SignUp */,
 				DDBD1C712A0F9E84002E849B /* HomeTabView.swift */,
-				DD6BA8F42A0CFA3B00DB5E88 /* HomeView.swift */,
-				DDBD1C732A0FA050002E849B /* SubModuleHome.swift */,
+				DDA013152A238E1100875D91 /* Home */,
 				DDEFB6162A0F39EF003845A1 /* GamesView.swift */,
 				DDB1AD632A10877000F442AC /* GameView.swift */,
 				DD79A9502A1863BF00A5D8D0 /* FavoritesView.swift */,
 				DDA21B9F2A18F2B5007DE61C /* ProfileView.swift */,
-				DD26DECC2A196F4400792BF5 /* EditProfileView.swift */,
+				DDA013182A238ECD00875D91 /* EditProfile */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,8 +204,7 @@
 		DDEFB6102A0F38FB003845A1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DDEFB6122A0F3989003845A1 /* Model.swift */,
-				DD243F162A11BBF200AA398B /* CommentsDataModel.swift */,
+				DDEFB6122A0F3989003845A1 /* GamesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -144,10 +212,11 @@
 		DDEFB6112A0F3956003845A1 /* ViewsModels */ = {
 			isa = PBXGroup;
 			children = (
-				DDEFB6142A0F39B5003845A1 /* ViewModel.swift */,
-				DDEE830F2A13920A005FF3D6 /* SearchGame.swift */,
-				DDF10B2B2A1A5A0700E0B6B4 /* SecurityDataManager.swift */,
-				DD3AF48C2A1EAF0200CBCFC8 /* FavoritesManager.swift */,
+				DDEFB6142A0F39B5003845A1 /* GamesViewModel.swift */,
+				DDA0131B2A2399F200875D91 /* LoginViewModel.swift */,
+				DDA0131D2A23A05400875D91 /* SignUpViewModel.swift */,
+				DD7C3EC82A23C51600D47753 /* HomeViewModel.swift */,
+				DD7C3ECA2A23D81400D47753 /* EditprofileViewModel.swift */,
 				DD8FE3E12A1FDAE80050CE97 /* VideoPlayerViewModel.swift */,
 				DD78ADCA2A212A1A008E7DF0 /* ProfilePhotoManager.swift */,
 			);
@@ -227,26 +296,33 @@
 				DD8FE3E22A1FDAE80050CE97 /* VideoPlayerViewModel.swift in Sources */,
 				DD26DECD2A196F4400792BF5 /* EditProfileView.swift in Sources */,
 				DDEFB6172A0F39EF003845A1 /* GamesView.swift in Sources */,
-				DDEFB6152A0F39B5003845A1 /* ViewModel.swift in Sources */,
+				DDEFB6152A0F39B5003845A1 /* GamesViewModel.swift in Sources */,
 				DD6BA8F52A0CFA3B00DB5E88 /* HomeView.swift in Sources */,
 				DD9683082A0B09670005FC21 /* ContentView.swift in Sources */,
 				DD9683062A0B09670005FC21 /* GameStreamApp.swift in Sources */,
 				DDBD1C722A0F9E84002E849B /* HomeTabView.swift in Sources */,
-				DDBD1C6A2A0F995F002E849B /* LoginAndSignUpView.swift in Sources */,
-				DDBD1C742A0FA050002E849B /* SubModuleHome.swift in Sources */,
+				DD7C3ECB2A23D81400D47753 /* EditprofileViewModel.swift in Sources */,
+				DDA0131C2A2399F200875D91 /* LoginViewModel.swift in Sources */,
 				DDBD1C702A0F9C1F002E849B /* SignUpView.swift in Sources */,
+				DD7C3EC52A23C06800D47753 /* ValidationService.swift in Sources */,
 				DDA21BA02A18F2B5007DE61C /* ProfileView.swift in Sources */,
 				DD3AF48D2A1EAF0200CBCFC8 /* FavoritesManager.swift in Sources */,
+				DD7C3EC92A23C51600D47753 /* HomeViewModel.swift in Sources */,
+				DDA0131A2A238EE900875D91 /* EditProfileAlert.swift in Sources */,
+				DD7C3EC72A23C24C00D47753 /* StringExtensions.swift in Sources */,
+				DDA0131E2A23A05400875D91 /* SignUpViewModel.swift in Sources */,
 				DDBD1C6C2A0F9A3B002E849B /* LoginView.swift in Sources */,
-				DDEE83102A13920A005FF3D6 /* SearchGame.swift in Sources */,
+				DDA013172A238E7D00875D91 /* GameAlert.swift in Sources */,
 				DD78ADCB2A212A1A008E7DF0 /* ProfilePhotoManager.swift in Sources */,
+				DDA013112A238D0A00875D91 /* LoginAlert.swift in Sources */,
 				DDBD1C6E2A0F9B58002E849B /* CustomSecureField.swift in Sources */,
 				DD79A9512A1863BF00A5D8D0 /* FavoritesView.swift in Sources */,
 				DDB1AD642A10877000F442AC /* GameView.swift in Sources */,
 				DD30CC1C2A2213C8001606E0 /* MainView.swift in Sources */,
+				DDA013142A238D8800875D91 /* SignUpAlert.swift in Sources */,
 				DDF10B2C2A1A5A0700E0B6B4 /* SecurityDataManager.swift in Sources */,
-				DDEFB6132A0F3989003845A1 /* Model.swift in Sources */,
-				DD243F172A11BBF200AA398B /* CommentsDataModel.swift in Sources */,
+				DDEFB6132A0F3989003845A1 /* GamesModel.swift in Sources */,
+				DD243F172A11BBF200AA398B /* CommentsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

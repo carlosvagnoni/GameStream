@@ -119,6 +119,8 @@ struct HomeTabView_Previews: PreviewProvider {
     static var previews: some View {
         
         HomeTabView()
+            .environmentObject(FavoritesManager())
+            .environmentObject(ProfilePhotoManager())
         
     }
 }

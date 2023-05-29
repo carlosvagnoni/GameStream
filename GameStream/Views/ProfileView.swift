@@ -25,11 +25,13 @@ struct ProfileView: View {
                 VStack(spacing: 0) {
                     
                     HStack(spacing: 0) {
+                        
                         Image("appLogoController")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 23)
                             .padding(.trailing, 10.0)
+                        
                         Image("appLogo")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -39,6 +41,7 @@ struct ProfileView: View {
                     
                     
                     ScrollView {
+                        
                         VStack(spacing: 0) {
                             
                             Text("Perfil")
@@ -57,12 +60,15 @@ struct ProfileView: View {
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 80, height: 80)
                                         .clipShape(Circle())
+                                    
                                 } else {
+                                    
                                     Image("exampleProfilePhoto")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 80, height: 80)
                                         .clipShape(Circle())
+                                    
                                 }
                                 
                                 Text(userNameManager.userName)
@@ -227,7 +233,9 @@ struct settingsModule: View {
             }
             
             NavigationLink(destination: EditProfileView(), isActive: $isEditProfileViewActive) {
+                
                 EmptyView()
+                
             }
             
         }

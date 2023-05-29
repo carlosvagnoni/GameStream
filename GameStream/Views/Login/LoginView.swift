@@ -9,13 +9,10 @@ import SwiftUI
 
 struct LoginView: View {
     
+    @ObservedObject var loginViewModel = LoginViewModel()
+    
     @State var email = ""
-    
     @State var password = ""
-    
-    @State var isHomeViewActive = false
-    
-    @State private var activeAlert: LoginAlert?
     
     var body: some View {
         
@@ -67,7 +64,9 @@ struct LoginView: View {
                     Spacer()
                     
                     Button("¿Olvidaste tu contraseña?") {
+                        
                         print("Ir a pantalla de recuperar contraseña")
+                        
                     }
                     .font(.footnote)
                     .foregroundColor(Color("dark-cian"))
@@ -75,7 +74,7 @@ struct LoginView: View {
                 
                 Spacer(minLength: 60)
                 
-                Button(action: { login(homeViewStatus: $isHomeViewActive, email: email, password: password, activeAlert: $activeAlert) }, label: {
+                Button(action: { loginViewModel.login(email: email, password: password) }, label: {
                     
                     Text("INICIAR SESIÓN")
                         .fontWeight(.bold)
@@ -86,10 +85,12 @@ struct LoginView: View {
                         .overlay(RoundedRectangle(cornerRadius: 6.0).stroke(Color("dark-cian"), lineWidth: 1.0).shadow(color: Color("dark-cian"), radius: 5))
                 })
                 .padding(.bottom, 60)
-                .alert(item: $activeAlert) { alertType in
+                .alert(item: $loginViewModel.activeAlert) { alertType in
                     switch alertType {
+                        
                     case .incorrectCredentials:
                         return Alert(title: Text("Error"), message: Text("Las credenciales son incorrectas."), dismissButton: .default(Text("Entendido")))
+                        
                     }
                 }
                 
@@ -104,7 +105,8 @@ struct LoginView: View {
                     
                     HStack {
                         
-                        Button(action: facebookLogin) {
+                        Button(action: loginViewModel.facebookLogin) {
+                            
                             Text("Facebook")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -115,7 +117,8 @@ struct LoginView: View {
                                 .cornerRadius(6.0)
                         }
                         
-                        Button(action: twitterLogin) {
+                        Button(action: loginViewModel.twitterLogin) {
+                            
                             Text("Twitter")
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -135,46 +138,14 @@ struct LoginView: View {
             
         }
         
-        NavigationLink(destination: HomeTabView(), isActive: $isHomeViewActive) {
+        NavigationLink(destination: HomeTabView(), isActive: $loginViewModel.isHomeViewActive) {
+            
             EmptyView()
+            
         }
     }
     
     
-}
-
-enum LoginAlert: Identifiable {
-    case incorrectCredentials
-
-    var id: Int {
-        switch self {
-        case .incorrectCredentials:
-            return 1
-        }
-    }
-}
-
-func login(homeViewStatus: Binding<Bool>, email: String, password: String, activeAlert: Binding<LoginAlert?>) {
-    
-    if SecurityDataManager.validate(email: email, password: password) {
-        
-        homeViewStatus.wrappedValue = true
-        
-    } else {
-        
-        activeAlert.wrappedValue = .incorrectCredentials
-        
-    }
-    
-    
-}
-
-func facebookLogin() {
-    print("Estoy inciando sesión con facebook")
-}
-
-func twitterLogin() {
-    print("Estoy inciando sesión con twitter")
 }
 
 struct LoginView_Previews: PreviewProvider {
